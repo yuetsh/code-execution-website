@@ -61,10 +61,10 @@ function App() {
     stdinEditorRef.current = editor
     editor.updateOptions(config)
     const { input, id } = getOJProblem()
-    if (input) {
+    if (input && id) {
       editor.setValue(input)
+      changeLanguage(String(id))
     }
-    changeLanguage(String(id))
   }
 
   function handleStdoutEditorDidMount(editor) {
