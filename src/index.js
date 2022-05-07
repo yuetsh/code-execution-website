@@ -5,7 +5,7 @@ import './index.css'
 import App from './App'
 
 loader.config({
-  paths: { vs: "https://unpkg.com/monaco-editor/min/vs" },
+  paths: { vs: "https://cdn.staticfile.org/monaco-editor/0.33.0/min/vs" },
   "vs/nls": { availableLanguages: { "*": "zh-cn" } } 
 })
 const root = ReactDOM.createRoot(document.getElementById('root'))
