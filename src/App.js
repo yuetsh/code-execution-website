@@ -30,6 +30,10 @@ function App() {
   const [languageID, setLanguageID] = useState(localStorage.getItem("language_id") || "50")
   const [status, setStatus] = useState(null)
   const [runBtnLoading, setRunBtnLoading] = useState(false)
+  const [header, setHeader] = useState({
+    primary: themeList[theme].primary,
+    type: themeList[theme].type,
+  })
 
   const config = {
     fontSize,
@@ -80,7 +84,7 @@ function App() {
     localStorage.setItem("fontsize", value)
   }
 
-  function handleThemeChange(value) {
+  async function handleThemeChange(value) {
     if (["vs-dark", "vs-light"].indexOf(value) !== -1) {
       monaco.editor.setTheme(value)
     } else {
@@ -88,15 +92,16 @@ function App() {
         monaco.editor.defineTheme(value, cachedThemes[value])
         monaco.editor.setTheme(value)
       } else {
-        fetch(`./themes/${themeList[value]}.json`).then(r => r.json()).then(data => {
-          monaco.editor.defineTheme(value, data)
-          monaco.editor.setTheme(value)
-          cachedThemes[value] = data
-          localStorage.setItem("themesData", JSON.stringify(cachedThemes))
-        })
+        const r = await fetch(`./themes/${themeList[value].file}.json`)
+        const data = await r.json()
+        monaco.editor.defineTheme(value, data)
+        monaco.editor.setTheme(value)
+        cachedThemes[value] = data
+        localStorage.setItem("themesData", JSON.stringify(cachedThemes))
       }
     }
     localStorage.setItem("theme", value)
+    setHeader({primary: themeList[value].primary, type: themeList[value].type})
   }
 
   function handleDownload() {
@@ -177,64 +182,65 @@ function App() {
         }
       }
     })
-  })
+  }, [monaco])
 
-  return [
-    <PageHeader
-      key={1}
-      title="徐越的代码运行网站"
-      extra={[
-        <Tag key={0} visible={!!status} color={status && status.id === 3 ? "success" : "warning"}>{status && status.msg}</Tag>,
-        <Select disabled={!monaco} key={1} defaultValue={theme} onChange={handleThemeChange}>
-          {Object.keys(themeList).map(it => <Option key={it} value={it}>{themeList[it]}</Option>)}
-        </Select>,
-        <InputNumber disabled={!monaco} key={2} min={14} max={40} step={2} value={fontSize} formatter={num => num + "px"} onChange={handleFontSize} style={{ width: 80 }}></InputNumber>,
-        <Button key={3} icon={<PlusOutlined />} onClick={() => window.open("/", "_blank")}>新建</Button>,
-        <Button disabled={!monaco} key={4} onClick={handleDownload} icon={<CloudDownloadOutlined />}>下载</Button>,
-        <Tooltip key={5} title="会删掉所写代码和输入信息" placement="bottom">
-          <Button disabled={!monaco} icon={<ReloadOutlined />} onClick={() => restore(languageID)}>重置</Button>
-        </Tooltip>,
-        <Select disabled={!monaco} key={6} defaultValue={languageID} value={languageID} onChange={handleLanguageChange}>
-          <Option key={1} value="50" mode="c">C (GCC 9.2.0)</Option>
-          <Option key={2} value="71" mode="python">Python (3.8.1)</Option>
-          <Option key={3} value="62" mode="java">Java (OpenJDK 13.0.1)</Option>
-        </Select>,
-        <Button disabled={!monaco} key={7} type="primary" onClick={handleRun} loading={runBtnLoading} icon={<CaretRightOutlined />}>运行</Button>
-      ]} />,
-    <Row className="content" key={2}>
-      <Allotment defaultSizes={[2, 1]}>
-        <Allotment.Pane>
-          <Editor
-            defaultLanguage={language[languageID]}
-            language={language[languageID]}
-            onMount={handleSourceEditorDidMount}
-            onChange={handleSourceChange}
-            loading={<Spin />}
-          />
-        </Allotment.Pane>
-        <Allotment.Pane>
-          <Allotment vertical>
-            <Allotment.Pane>
-              <Editor
-                defaultLanguage="plaintext"
-                defaultValue="输入信息"
-                onMount={handleStdinEditorDidMount}
-                loading={<Spin />}
-              />
-            </Allotment.Pane>
-            <Allotment.Pane>
-              <Editor
-                defaultLanguage="plaintext"
-                defaultValue="输出信息"
-                onMount={handleStdoutEditorDidMount}
-                loading={<Spin />}
-              />
-            </Allotment.Pane>
-          </Allotment>
-        </Allotment.Pane>
-      </Allotment>
-    </Row >
-  ]
+  return (
+    <div style={{ backgroundColor: header.primary }}>
+      <PageHeader
+        title={<span style={{ color: header.type === "dark" ? "white" : "black" }}>徐越的代码运行网站</span>}
+        extra={[
+          <Tag key={0} visible={!!status} color={status && status.id === 3 ? "success" : "warning"}>{status && status.msg}</Tag>,
+          <Select disabled={!monaco} key={1} defaultValue={theme} onChange={handleThemeChange}>
+            {Object.keys(themeList).map(it => <Option key={it} value={it}>{themeList[it].file}</Option>)}
+          </Select>,
+          <InputNumber disabled={!monaco} key={2} min={14} max={40} step={2} value={fontSize} formatter={num => num + "px"} onChange={handleFontSize} style={{ width: 80 }}></InputNumber>,
+          <Button key={3} icon={<PlusOutlined />} onClick={() => window.open("/", "_blank")}>新建</Button>,
+          <Button disabled={!monaco} key={4} onClick={handleDownload} icon={<CloudDownloadOutlined />}>下载</Button>,
+          <Tooltip key={5} title="会删掉所写代码和输入信息" placement="bottom">
+            <Button disabled={!monaco} icon={<ReloadOutlined />} onClick={() => restore(languageID)}>重置</Button>
+          </Tooltip>,
+          <Select disabled={!monaco} key={6} defaultValue={languageID} value={languageID} onChange={handleLanguageChange}>
+            <Option key={1} value="50" mode="c">C (GCC 9.2.0)</Option>
+            <Option key={2} value="71" mode="python">Python (3.8.1)</Option>
+            <Option key={3} value="62" mode="java">Java (OpenJDK 13.0.1)</Option>
+          </Select>,
+          <Button disabled={!monaco} key={7} type="primary" onClick={handleRun} loading={runBtnLoading} icon={<CaretRightOutlined />}>运行</Button>
+        ]} />
+      <Row className="content" key={2}>
+        <Allotment defaultSizes={[2, 1]}>
+          <Allotment.Pane>
+            <Editor
+              defaultLanguage={language[languageID]}
+              language={language[languageID]}
+              onMount={handleSourceEditorDidMount}
+              onChange={handleSourceChange}
+              loading={<Spin />}
+            />
+          </Allotment.Pane>
+          <Allotment.Pane>
+            <Allotment vertical>
+              <Allotment.Pane>
+                <Editor
+                  defaultLanguage="plaintext"
+                  defaultValue="输入信息"
+                  onMount={handleStdinEditorDidMount}
+                  loading={<Spin />}
+                />
+              </Allotment.Pane>
+              <Allotment.Pane>
+                <Editor
+                  defaultLanguage="plaintext"
+                  defaultValue="输出信息"
+                  onMount={handleStdoutEditorDidMount}
+                  loading={<Spin />}
+                />
+              </Allotment.Pane>
+            </Allotment>
+          </Allotment.Pane>
+        </Allotment>
+      </Row >
+    </div>
+  )
 }
 
 export default App

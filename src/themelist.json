@@ -1,16 +1,72 @@
 {
-  "vs-dark": "VS Dark",
-  "vs-light": "VS Light",
-  "cobalt2": "Cobalt2",
-  "dracula": "Dracula",
-  "github": "GitHub",
-  "monokai": "Monokai",
-  "monoindustrial": "Mono Industrial",
-  "pastels-on-dark": "Pastels on Dark",
-  "night-owl": "Night Owl",
-  "oceanic-next": "Oceanic Next",
-  "solarized-light": "Solarized Light",
-  "solarized-dark": "Solarized Dark",
-  "tomorrow": "Tomorrow",
-  "tomorrow-night": "Tomorrow Night"
+  "vs-dark": {
+    "file": "VS Dark",
+    "primary": "#1e1e1e",
+    "type": "dark"
+  },
+  "vs-light": {
+    "file": "VS Light",
+    "primary": "#fff",
+    "type": "light"
+  },
+  "cobalt2": {
+    "file": "Cobalt2",
+    "primary": "#193549",
+    "type": "dark"
+  },
+  "dracula": {
+    "file": "Dracula",
+    "primary": "#282a36",
+    "type": "dark"
+  },
+  "github": {
+    "file": "GitHub",
+    "primary": "#f8f8ff",
+    "type": "light"
+  },
+  "monokai": {
+    "file": "Monokai",
+    "primary": "#272822",
+    "type": "dark"
+  },
+  "monoindustrial": {
+    "file": "Mono Industrial",
+    "primary": "#222C28",
+    "type": "dark"
+  },
+  "pastels-on-dark": {
+    "file": "Pastels on Dark",
+    "primary": "#211E1E",
+    "type": "dark"
+  },
+  "night-owl": {
+    "file": "Night Owl",
+    "primary": "#011627",
+    "type": "dark"
+  },
+  "oceanic-next": {
+    "file": "Oceanic Next",
+    "primary": "#1B2B34",
+    "type": "dark"
+  },
+  "solarized-light": {
+    "file": "Solarized Light",
+    "primary": "#FDF6E3",
+    "type": "light"
+  },
+  "solarized-dark": {
+    "file": "Solarized Dark",
+    "primary": "#002B36",
+    "type": "dark"
+  },
+  "tomorrow": {
+    "file": "Tomorrow",
+    "primary": "#FFFFFF",
+    "type": "light"
+  },
+  "tomorrow-night": {
+    "file": "Tomorrow Night",
+    "primary": "#1D1F21",
+    "type": "dark"
+  }
 }
