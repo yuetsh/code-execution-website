@@ -191,18 +191,20 @@ function App() {
         extra={[
           <Tag key={0} visible={!!status} color={status && status.id === 3 ? "success" : "warning"}>{status && status.msg}</Tag>,
           <Select disabled={!monaco} key={1} defaultValue={theme} onChange={handleThemeChange}>
-            {Object.keys(themeList).map(it => <Option key={it} value={it}>{themeList[it].file}</Option>)}
+            {Object.keys(themeList).map(it => <Option key={it} value={it}>{"主题：" + themeList[it].file}</Option>)}
           </Select>,
-          <InputNumber disabled={!monaco} key={2} min={14} max={40} step={2} value={fontSize} formatter={num => num + "px"} onChange={handleFontSize} style={{ width: 80 }}></InputNumber>,
+          <InputNumber disabled={!monaco} key={2} min={14} max={40} step={2}
+            value={fontSize} formatter={num => "字号：" + num + "px"} onChange={handleFontSize}
+            style={{ width: 100 }}></InputNumber>,
           <Button key={3} icon={<PlusOutlined />} onClick={() => window.open("/", "_blank")}>新建</Button>,
           <Button disabled={!monaco} key={4} onClick={handleDownload} icon={<CloudDownloadOutlined />}>下载</Button>,
           <Tooltip key={5} title="会删掉所写代码和输入信息" placement="bottom">
             <Button disabled={!monaco} icon={<ReloadOutlined />} onClick={() => restore(languageID)}>重置</Button>
           </Tooltip>,
           <Select disabled={!monaco} key={6} defaultValue={languageID} value={languageID} onChange={handleLanguageChange}>
-            <Option key={1} value="50" mode="c">C (GCC 9.2.0)</Option>
-            <Option key={2} value="71" mode="python">Python (3.8.1)</Option>
-            <Option key={3} value="62" mode="java">Java (OpenJDK 13.0.1)</Option>
+            <Option key={1} value="50" mode="c">语言：C (GCC 9.2.0)</Option>
+            <Option key={2} value="71" mode="python">语言：Python (3.8.1)</Option>
+            <Option key={3} value="62" mode="java">语言：Java (OpenJDK 13.0.1)</Option>
           </Select>,
           <Button disabled={!monaco} key={7} type="primary" onClick={handleRun} loading={runBtnLoading} icon={<CaretRightOutlined />}>运行</Button>
         ]} />
