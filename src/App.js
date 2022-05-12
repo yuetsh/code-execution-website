@@ -101,7 +101,7 @@ function App() {
       }
     }
     localStorage.setItem("theme", value)
-    setHeader({primary: themeList[value].primary, type: themeList[value].type})
+    setHeader({ primary: themeList[value].primary, type: themeList[value].type })
   }
 
   function handleDownload() {
@@ -187,7 +187,7 @@ function App() {
   return (
     <div style={{ backgroundColor: header.primary }}>
       <PageHeader
-        title={<span style={{ color: header.type === "dark" ? "white" : "black" }}>徐越的代码运行网站</span>}
+        title={<span style={{ color: header.type === "dark" ? "white" : "black" }}>徐越的自测猫</span>}
         extra={[
           <Tag key={0} visible={!!status} color={status && status.id === 3 ? "success" : "warning"}>{status && status.msg}</Tag>,
           <Select disabled={!monaco} key={1} defaultValue={theme} onChange={handleThemeChange}>
