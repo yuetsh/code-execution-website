@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react"
-import { Row, PageHeader, Button, Select, Modal, Tooltip, Spin, Tag, InputNumber } from 'antd'
-import { CaretRightOutlined, CloudDownloadOutlined, PlusOutlined, ReloadOutlined } from '@ant-design/icons'
+import { Row, PageHeader, Button, Select, Modal, Spin, Tag, InputNumber, message } from 'antd'
+import { CaretRightOutlined, CloudDownloadOutlined, PlusOutlined, ReloadOutlined, CopyOutlined } from '@ant-design/icons'
 import Editor, { useMonaco } from '@monaco-editor/react'
 import { Allotment } from 'allotment'
 import download from 'downloadjs'
@@ -11,6 +11,7 @@ import { sources, language, filename } from './templates'
 import { createSubmission, getOJProblem } from './request'
 
 const { Option } = Select
+message.config({ maxCount: 1 })
 
 function App() {
   const monaco = useMonaco()
@@ -117,10 +118,9 @@ function App() {
     localStorage.removeItem("code_record")
   }
 
-  function restore(idString) {
-    stdinEditorRef.current.setValue("输入信息")
-    stdoutEditorRef.current.setValue("输出信息")
-    changeLanguage(idString)
+  function restore() {
+    changeLanguage(languageID)
+    message.success("代码重置成功")
   }
 
   function handleLanguageChange(value) {
@@ -163,6 +163,15 @@ function App() {
     })
   }
 
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(sourceEditorRef.current.getValue())
+      message.success("代码复制成功")
+    } catch (e) {
+      message.error("代码复制失败")
+    }
+  }
+
   useEffect(() => {
     if (monaco) {
       handleThemeChange(theme)
@@ -198,15 +207,14 @@ function App() {
             style={{ width: 100 }}></InputNumber>,
           <Button key={3} icon={<PlusOutlined />} onClick={() => window.open("/", "_blank")}>新建</Button>,
           <Button disabled={!monaco} key={4} onClick={handleDownload} icon={<CloudDownloadOutlined />}>下载</Button>,
-          <Tooltip key={5} title="会删掉所写代码和输入信息" placement="bottom">
-            <Button disabled={!monaco} icon={<ReloadOutlined />} onClick={() => restore(languageID)}>重置</Button>
-          </Tooltip>,
-          <Select disabled={!monaco} key={6} defaultValue={languageID} value={languageID} onChange={handleLanguageChange}>
+          <Button disabled={!monaco} key={5} icon={<ReloadOutlined />} onClick={restore}>重置</Button>,
+          <Button disabled={!monaco} key={6} onClick={copy} icon={<CopyOutlined />}>复制</Button>,
+          <Select disabled={!monaco} key={7} defaultValue={languageID} value={languageID} onChange={handleLanguageChange}>
             <Option key={1} value="50" mode="c">语言：C (GCC 9.2.0)</Option>
             <Option key={2} value="71" mode="python">语言：Python (3.8.1)</Option>
             <Option key={3} value="62" mode="java">语言：Java (OpenJDK 13.0.1)</Option>
           </Select>,
-          <Button disabled={!monaco} key={7} type="primary" onClick={handleRun} loading={runBtnLoading} icon={<CaretRightOutlined />}>运行</Button>
+          <Button disabled={!monaco} key={8} type="primary" onClick={handleRun} loading={runBtnLoading} icon={<CaretRightOutlined />}>运行</Button>
         ]} />
       <Row className="content" key={2}>
         <Allotment defaultSizes={[2, 1]}>
