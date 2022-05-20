@@ -198,25 +198,26 @@ function App() {
       <PageHeader
         title={<span style={{ color: header.type === "dark" ? "white" : "black" }}>徐越的自测猫</span>}
         extra={[
-          <Tag key={0} visible={!!status} color={status && status.id === 3 ? "success" : "warning"}>{status && status.msg}</Tag>,
-          <Select disabled={!monaco} key={1} defaultValue={theme} onChange={handleThemeChange}>
+          <Tag key="status" visible={!!status} color={status && status.id === 3 ? "success" : "warning"}>{status && status.msg}</Tag>,
+          <Select disabled={!monaco} key="theme" style={{ width: 160 }} defaultValue={theme} onChange={handleThemeChange}>
             {Object.keys(themeList).map(it => <Option key={it} value={it}>{"主题：" + themeList[it].file}</Option>)}
           </Select>,
-          <InputNumber disabled={!monaco} key={2} min={14} max={40} step={2}
+          <InputNumber disabled={!monaco} key="font_size" min={14} max={40} step={2}
             value={fontSize} formatter={num => "字号：" + num + "px"} onChange={handleFontSize}
             style={{ width: 100 }}></InputNumber>,
-          <Button key={3} icon={<PlusOutlined />} onClick={() => window.open("/", "_blank")}>新建</Button>,
-          <Button disabled={!monaco} key={4} onClick={handleDownload} icon={<CloudDownloadOutlined />}>下载</Button>,
-          <Button disabled={!monaco} key={5} icon={<ReloadOutlined />} onClick={restore}>重置</Button>,
-          <Button disabled={!monaco} key={6} onClick={copy} icon={<CopyOutlined />}>复制</Button>,
-          <Select disabled={!monaco} key={7} defaultValue={languageID} value={languageID} onChange={handleLanguageChange}>
-            <Option key={1} value="50" mode="c">语言：C (GCC 9.2.0)</Option>
-            <Option key={2} value="71" mode="python">语言：Python (3.8.1)</Option>
-            <Option key={3} value="62" mode="java">语言：Java (OpenJDK 13.0.1)</Option>
+          <Button key="new" icon={<PlusOutlined />} onClick={() => window.open("/", "_blank")}>新建</Button>,
+          <Button disabled={!monaco} key="download" onClick={handleDownload} icon={<CloudDownloadOutlined />}>下载</Button>,
+          <Button disabled={!monaco} key="restore" icon={<ReloadOutlined />} onClick={restore}>重置</Button>,
+          <Button disabled={!monaco} key="copy" onClick={copy} icon={<CopyOutlined />}>复制</Button>,
+          <Select disabled={!monaco} key="language" style={{ width: 110 }} defaultValue={languageID} value={languageID} onChange={handleLanguageChange}>
+            <Option key="c" value="50">语言：C</Option>
+            <Option key="cpp" value="54">语言：C++</Option>
+            <Option key="python" value="71">语言：Python</Option>
+            <Option key="java" value="62">语言：Java</Option>
           </Select>,
-          <Button disabled={!monaco} key={8} type="primary" onClick={handleRun} loading={runBtnLoading} icon={<CaretRightOutlined />}>运行</Button>
+          <Button disabled={!monaco} key="run" type="primary" onClick={handleRun} loading={runBtnLoading} icon={<CaretRightOutlined />}>运行</Button>
         ]} />
-      <Row className="content" key={2}>
+      <Row className="content">
         <Allotment defaultSizes={[2, 1]}>
           <Allotment.Pane>
             <Editor
