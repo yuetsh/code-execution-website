@@ -149,18 +149,17 @@ function App() {
     }
   }
 
-  function handleRun() {
+  async function handleRun() {
     setStatus(null)
     setRunBtnLoading(true)
     const content = sourceEditorRef.current.getValue().trim()
     if (!content) return
     stdoutEditorRef.current.setValue("")
     const stdinValue = stdinEditorRef.current.getValue().trim()
-    createSubmission(content, stdinValue, parseInt(languageID)).then(data => {
-      stdoutEditorRef.current.setValue(data.output)
-      setStatus(data.status)
-      setRunBtnLoading(false)
-    })
+    const data = await createSubmission(content, stdinValue, parseInt(languageID))
+    stdoutEditorRef.current.setValue(data.output)
+    setStatus(data.status)
+    setRunBtnLoading(false)
   }
 
   async function copy() {
