@@ -8,7 +8,7 @@ import './App.css'
 import "allotment/dist/style.css"
 import themeList from './themelist.json'
 import { sources, language, filename } from './templates'
-import { createSubmission, getOJProblem } from './request'
+import { createSubmission, getOJProblem } from './api'
 
 const { Option } = Select
 message.config({ maxCount: 1 })
@@ -27,7 +27,7 @@ function App() {
   const stdoutEditorRef = useRef(null)
 
   const theme = localStorage.getItem("theme") || "vs-dark"
-  const [fontSize, setFontSize] = useState(localStorage.getItem("fontsize") || 18)
+  const [fontSize, setFontSize] = useState(localStorage.getItem("fontsize") || 20)
   const [languageID, setLanguageID] = useState(localStorage.getItem("language_id") || "50")
   const [status, setStatus] = useState(null)
   const [runBtnLoading, setRunBtnLoading] = useState(false)
