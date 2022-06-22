@@ -16,7 +16,7 @@ jobs:
           node-version: 'current'
           cache: 'npm'
       - run: npm install
-      - run: npm run build
+      - run: CI=false npm run build
 
       - uses: appleboy/ssh-action@v0.1.4
         with:
