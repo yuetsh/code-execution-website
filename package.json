@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@monaco-editor/react": "^4.4.4",
-    "allotment": "^1.13.0",
+    "allotment": "^1.14.2",
     "antd": "^4.20.2",
     "downloadjs": "^1.4.7",
     "query-string": "^7.1.1",
