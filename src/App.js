@@ -190,6 +190,7 @@ function App() {
         }
       }
     })
+    // eslint-disable-next-line
   }, [monaco])
 
   return (

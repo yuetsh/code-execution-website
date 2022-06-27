@@ -40,7 +40,7 @@ export async function createSubmission(code, stdin, id) {
             const data = await response.json()
             const memory = (data.memory === null ? "-" : parseInt(data.memory / 1024) + "MB")
             const time = (data.time === null ? "-" : data.time * 1000 + "ms")
-            console.log("Token 是", data.token)
+            // console.log("Token 是", data.token)
             return {
                 status: { id: data.status.id, msg: `${data.status.description}, ${time}, ${memory}` },
                 output: [decode(data.compile_output), decode(data.stdout)].join("\n").trim(),
