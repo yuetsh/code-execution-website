@@ -124,6 +124,7 @@ function App() {
   }
 
   function handleLanguageChange(value) {
+    isEditorDirty = sourceEditorRef.current.getValue() !== sources[parseInt(languageID)]
     if (isEditorDirty) {
       Modal.confirm({
         title: "警告",
