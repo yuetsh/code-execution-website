@@ -1,15 +1,15 @@
 {
   "name": "ide-next",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
-    "@monaco-editor/react": "^4.4.4",
+    "@monaco-editor/react": "^4.4.5",
     "allotment": "^1.14.2",
-    "antd": "^4.20.2",
+    "antd": "^4.21.4",
     "downloadjs": "^1.4.7",
     "query-string": "^7.1.1",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {

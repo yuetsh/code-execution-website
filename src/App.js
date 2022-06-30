@@ -190,6 +190,10 @@ function App() {
             break
         }
       }
+      if (e.key === 'F5') {
+        e.preventDefault()
+        handleRun()
+      }
     })
     // eslint-disable-next-line
   }, [monaco])
@@ -216,7 +220,7 @@ function App() {
             <Option key="python" value="71">语言：Python</Option>
             <Option key="java" value="62">语言：Java</Option>
           </Select>,
-          <Button disabled={!monaco} key="run" type="primary" onClick={handleRun} loading={runBtnLoading} icon={<CaretRightOutlined />}>运行</Button>
+          <Button disabled={!monaco} key="run" type="primary" onClick={handleRun} loading={runBtnLoading} icon={<CaretRightOutlined />}>运行(F5)</Button>
         ]} />
       <Row className="content">
         <Allotment defaultSizes={[2, 1]}>
