@@ -1,9 +1,8 @@
 import { useRef, useEffect, useState } from "react"
 import { Row, PageHeader, Button, Select, Modal, Spin, Tag, InputNumber, message } from 'antd'
-import { CaretRightOutlined, CloudDownloadOutlined, PlusOutlined, ReloadOutlined, CopyOutlined } from '@ant-design/icons'
+import { CaretRightOutlined, ReloadOutlined, CopyOutlined } from '@ant-design/icons'
 import Editor, { useMonaco } from '@monaco-editor/react'
 import { Allotment } from 'allotment'
-import download from 'downloadjs'
 import './App.css'
 import "allotment/dist/style.css"
 import themeList from './themelist.json'
@@ -105,12 +104,6 @@ function App() {
     setHeader({ primary: themeList[value].primary, type: themeList[value].type })
   }
 
-  function handleDownload() {
-    const codes = sourceEditorRef.current.getValue().trim()
-    if (!codes) return
-    download(codes, filename[parseInt(languageID)], "text/plain")
-  }
-
   function changeLanguage(idString) {
     setLanguageID(idString)
     sourceEditorRef.current.setValue(sources[parseInt(idString)])
@@ -210,8 +203,6 @@ function App() {
           <InputNumber disabled={!monaco} key="font_size" min={14} max={40} step={2}
             value={fontSize} formatter={num => "字号：" + num + "px"} onChange={handleFontSize}
             style={{ width: 100 }}></InputNumber>,
-          <Button key="new" icon={<PlusOutlined />} onClick={() => window.open("/", "_blank")}>新建</Button>,
-          <Button disabled={!monaco} key="download" onClick={handleDownload} icon={<CloudDownloadOutlined />}>下载</Button>,
           <Button disabled={!monaco} key="restore" icon={<ReloadOutlined />} onClick={restore}>重置</Button>,
           <Button disabled={!monaco} key="copy" onClick={copy} icon={<CopyOutlined />}>复制</Button>,
           <Select disabled={!monaco} key="language" style={{ width: 110 }} defaultValue={languageID} value={languageID} onChange={handleLanguageChange}>
