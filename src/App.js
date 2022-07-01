@@ -6,7 +6,7 @@ import { Allotment } from 'allotment'
 import './App.css'
 import "allotment/dist/style.css"
 import themeList from './themelist.json'
-import { sources, language, filename } from './templates'
+import { sources, language } from './templates'
 import { createSubmission, getOJProblem } from './api'
 
 const { Option } = Select
