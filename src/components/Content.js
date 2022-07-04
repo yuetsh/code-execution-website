@@ -4,7 +4,7 @@ import { Allotment } from 'allotment'
 import { Row, Spin } from 'antd'
 import { language } from '../assets/templates'
 import store from '../store'
-import Live2D from './Live2D'
+import Live2d from './Live2d'
 import styles from './Content.module.css'
 
 function Content() {
@@ -27,7 +27,7 @@ function Content() {
               onChange={changeSource}
               loading={<Spin />}
             />
-            <Live2D />
+            <Live2d />
           </main>
         </Allotment.Pane>
         <Allotment.Pane>

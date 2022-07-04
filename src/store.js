@@ -9,6 +9,7 @@ import themeList from './assets/themelist.json'
 function useStore() {
   const monaco = useMonaco()
   const theme = localStorage.getItem("theme") || "vs-dark"
+  const TOTAL_GIRLS = 8
 
   let isEditorDirty = false
 
@@ -153,8 +154,9 @@ function useStore() {
   }
 
   function changeLive2d() {
-    setLive2dID(parseInt(live2dID) >= 2 ? '-1' : String(parseInt(live2dID) + 1))
-    localStorage.setItem('live2d_id', live2dID)
+    const idString = parseInt(live2dID) >= TOTAL_GIRLS - 1 ? '-1' : String(parseInt(live2dID) + 1)
+    setLive2dID(idString)
+    localStorage.setItem('live2d_id', idString)
   }
 
   async function copy() {
