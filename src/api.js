@@ -1,5 +1,5 @@
 import qs from 'query-string'
-import { submissionBase64 } from './templates'
+import { submissionBase64 } from './assets/templates'
 
 const BASE_URL = "https://judge0api.hyyz.izhai.net"
 

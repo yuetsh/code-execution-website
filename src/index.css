@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.compact.css';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,13 +8,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-width: 800px;
-  cursor: url(./Arrow.cur), default;
+  cursor: url(./assets/Arrow.cur), default;
 }
 
 .ant-select:hover,
 .ant-select-item-option:hover,
 button:hover {
-  cursor: url(./Hand.cur), pointer;
+  cursor: url(./assets/Hand.cur), pointer;
 }
 
 code {
