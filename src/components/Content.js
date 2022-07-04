@@ -3,9 +3,9 @@ import Editor from '@monaco-editor/react'
 import { Allotment } from 'allotment'
 import { Row, Spin } from 'antd'
 import { language } from '../assets/templates'
-import AppStore from './App.store'
+import store from '../store'
 import Live2D from './Live2D'
-import styles from './App.module.css'
+import styles from './Content.module.css'
 
 function Content() {
   const {
@@ -14,7 +14,7 @@ function Content() {
     stdinEditorDidMount,
     stdoutEditorDidMount,
     changeSource,
-  } = AppStore.useContainer()
+  } = store.useContainer()
   return (
     <Row className={styles.content}>
       <Allotment defaultSizes={[2, 1]}>

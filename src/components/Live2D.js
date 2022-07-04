@@ -1,10 +1,10 @@
 import React from 'react'
-import AppStore from './App.store'
+import store from '../store'
 import images from '../assets/images'
 import styles from './Live2D.module.css'
 
 function Live2D() {
-  const { live2dID } = AppStore.useContainer()
+  const { live2dID } = store.useContainer()
   return (
     <React.Fragment>
       {parseInt(live2dID) === 0 && <img className={styles.live2dContainer} src={images[live2dID]} alt="" style={{ right: '14px', bottom: '-6px' }} />}

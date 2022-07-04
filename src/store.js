@@ -2,9 +2,9 @@ import { useState, useRef } from 'react'
 import { createContainer } from 'unstated-next'
 import { useMonaco } from '@monaco-editor/react'
 import { Modal, message } from 'antd'
-import { createSubmission, getOJProblem } from '../api'
-import { sources } from '../assets/templates'
-import themeList from '../assets/themelist.json'
+import { createSubmission, getOJProblem } from './api'
+import { sources } from './assets/templates'
+import themeList from './assets/themelist.json'
 
 function useStore() {
   const monaco = useMonaco()

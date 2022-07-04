@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { message } from 'antd'
-import 'allotment/dist/style.css'
-import AppStore from './App.store'
+import store from '../store'
 import Header from './Header'
 import Content from './Content'
+import 'allotment/dist/style.css'
 
 message.config({ maxCount: 1 })
 
 function App() {
-  const { monaco, theme, header, changeTheme, run } = AppStore.useContainer()
+  const { monaco, theme, header, changeTheme, run } = store.useContainer()
 
   useEffect(() => {
     if (monaco) {

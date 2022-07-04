@@ -1,6 +1,6 @@
 import { PageHeader, Button, Select, Tag, InputNumber } from 'antd'
 import { CaretRightOutlined } from '@ant-design/icons'
-import AppStore from './App.store'
+import store from '../store'
 import themeList from '../assets/themelist.json'
 
 const { Option } = Select
@@ -22,7 +22,7 @@ function Header() {
     run,
     changeLive2d,
     copy
-  } = AppStore.useContainer()
+  } = store.useContainer()
 
   return (
     <PageHeader
