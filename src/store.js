@@ -9,7 +9,7 @@ import themeList from './assets/themelist.json'
 function useStore() {
   const monaco = useMonaco()
   const theme = localStorage.getItem("theme") || "vs-dark"
-  const TOTAL_GIRLS = 8
+  const TOTAL_GIRLS = 5
 
   let isEditorDirty = false
 

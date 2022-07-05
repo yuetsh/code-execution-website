@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import clsx from 'clsx'
 import store from '../store'
 import images from '../assets/images'
 import styles from './Live2d.module.css'
@@ -9,22 +10,13 @@ function Live2d() {
   useEffect(() => {
     const id = parseInt(live2dID)
     let model = '/live2d/models/'
-    if (id > 2) {
+    if (id > 2 && window.loadlive2d) {
       switch (id) {
         case 3:
-          model += '22/default'
+          model += '33'
           break
         case 4:
-          model += '33/default'
-          break
-        case 5:
-          model += '22/christmas'
-          break
-        case 6:
-          model += '33/christmas'
-          break
-        case 7:
-          model += 'tia'
+          model += 'wanko'
           break
         default:
           break
@@ -40,7 +32,8 @@ function Live2d() {
       {parseInt(live2dID) === 1 && <img className={styles.live2dContainer} src={images[1]} alt="" style={{ right: '3px' }} />}
       {parseInt(live2dID) === 2 && <img className={styles.live2dContainer} src={images[2]} alt="" style={{ right: '6px' }} />}
       {parseInt(live2dID) >= 3 && <div className={styles.live2dCanvasContainer}>
-        <canvas id="live2d" width="400" height="400" className={styles.live2d}></canvas>
+        <canvas id="live2d" width="400" height="400"
+          className={clsx(styles.live2d, parseInt(live2dID) >= 4 && styles.special)}></canvas>
       </div>}
     </React.Fragment>
   )

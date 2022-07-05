@@ -6,6 +6,7 @@
     "@monaco-editor/react": "^4.4.5",
     "allotment": "^1.14.2",
     "antd": "^4.21.4",
+    "clsx": "^1.2.0",
     "query-string": "^7.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
