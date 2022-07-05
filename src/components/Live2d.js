@@ -33,7 +33,7 @@ function Live2d() {
       {parseInt(live2dID) === 2 && <img className={styles.live2dContainer} src={images[2]} alt="" style={{ right: '6px' }} />}
       {parseInt(live2dID) >= 3 && <div className={styles.live2dCanvasContainer}>
         <canvas id="live2d" width="400" height="400"
-          className={clsx(styles.live2d, parseInt(live2dID) >= 4 && styles.special)}></canvas>
+          className={clsx(styles.live2d, parseInt(live2dID) === 4 && styles.special)}></canvas>
       </div>}
     </React.Fragment>
   )
