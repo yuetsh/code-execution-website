@@ -23,11 +23,14 @@ export async function createSubmission(code, stdin, id) {
     if (encodedCode === submissionBase64[id].sourceBase64) {
         return submissionBase64[id].result
     } else {
+        let compilerOptions = ''
+        if (id === 50) compilerOptions = '-lm' // 解决 GCC 的链接问题
         const payload = {
             source_code: encodedCode,
             language_id: id,
             stdin: encode(stdin),
-            redirect_stderr_to_stdout: true
+            redirect_stderr_to_stdout: true,
+            compiler_options: compilerOptions,
         }
         try {
             const response = await fetch(`${BASE_URL}/submissions?base64_encoded=true&wait=true`, {
