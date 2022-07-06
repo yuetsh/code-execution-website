@@ -1,5 +1,5 @@
 .staticImage {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     pointer-events: none;
 }
@@ -20,7 +20,7 @@
 .live2dCanvasContainer {
     user-select: none;
     pointer-events: none;
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
     z-index: 100;

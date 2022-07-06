@@ -3,6 +3,7 @@ import { message } from 'antd'
 import store from '../store'
 import Header from './Header'
 import Content from './Content'
+import Live2d from './Live2d'
 import 'allotment/dist/style.css'
 
 message.config({ maxCount: 1 })
@@ -40,6 +41,7 @@ function App() {
     <div style={{ backgroundColor: header.primary }}>
       <Header />
       <Content />
+      <Live2d />
     </div>
   )
 }

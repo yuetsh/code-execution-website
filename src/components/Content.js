@@ -4,7 +4,6 @@ import { Allotment } from 'allotment'
 import { Row, Spin } from 'antd'
 import { language } from '../assets/templates'
 import store from '../store'
-import Live2d from './Live2d'
 import styles from './Content.module.css'
 
 function Content() {
@@ -19,16 +18,13 @@ function Content() {
     <Row className={styles.content}>
       <Allotment defaultSizes={[2, 1]}>
         <Allotment.Pane>
-          <main className={styles.editorContainer}>
-            <Editor
-              defaultLanguage={language[languageID]}
-              language={language[languageID]}
-              onMount={sourceEditorDidMount}
-              onChange={changeSource}
-              loading={<Spin />}
-            />
-            <Live2d />
-          </main>
+          <Editor
+            defaultLanguage={language[languageID]}
+            language={language[languageID]}
+            onMount={sourceEditorDidMount}
+            onChange={changeSource}
+            loading={<Spin />}
+          />
         </Allotment.Pane>
         <Allotment.Pane>
           <Allotment vertical>
