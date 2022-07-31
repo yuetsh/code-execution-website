@@ -54,8 +54,8 @@ export function sourceEditorDidMount(editor) {
   editor.focus()
   editor.updateOptions({
     ...config,
-    scrollBeyondLastLine: true,
-    lineNumbers: "on"
+    scrollBeyondLastLine: window.innerWidth > 890 ? true : false,
+    lineNumbers: window.innerWidth > 890 ? "on" : "off"
   })
   const codeRecord = localStorage.getItem("code_record") || ""
   if (codeRecord) {
