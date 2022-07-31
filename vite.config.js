@@ -6,13 +6,13 @@ import legacy from '@vitejs/plugin-legacy'
 export default defineConfig({
   build: {
     outDir: 'build',
-    // rollupOptions: {
-    //   output: {
-    //     manualChunks: {
-    //       antd: ['antd']
-    //     }
-    //   }
-    // }
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          antd: ['antd']
+        }
+      }
+    }
   },
   plugins: [
     react(), 
