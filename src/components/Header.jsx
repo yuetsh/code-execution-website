@@ -19,9 +19,9 @@ function Header() {
     changeTheme,
     restore,
     switchLanguage,
-    run,
     changeLive2d,
-    copy
+    copy,
+    run,
   } = store.useContainer()
 
   return (

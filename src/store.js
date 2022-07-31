@@ -89,7 +89,7 @@ function useStore() {
         monaco.editor.defineTheme(value, cachedThemes[value])
         monaco.editor.setTheme(value)
       } else {
-        const r = await fetch(`./themes/${themeList[value].file}.json`)
+        const r = await fetch(`/themes/${themeList[value].file}.json`)
         const data = await r.json()
         monaco.editor.defineTheme(value, data)
         monaco.editor.setTheme(value)
@@ -123,7 +123,7 @@ function useStore() {
         cancelText: "取消",
         maskClosable: true,
         onOk() {
-          changeLanguage(value)
+      changeLanguage(value)
         }
       })
     } else {
