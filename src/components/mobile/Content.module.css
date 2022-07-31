@@ -1,0 +1,17 @@
+.content {
+    height: calc(100vh - 49px);
+    display: flex;
+    flex-direction: column;
+}
+
+.content>section:nth-child(1) {
+    flex: 2;
+}
+
+.content>section:nth-child(2) {
+    flex: 1;
+}
+
+.content>section:nth-child(3) {
+    flex: 1;
+}

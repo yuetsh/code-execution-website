@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
+import { useSnapshot } from 'valtio'
 import clsx from 'clsx'
-import store from '../store'
-import images from '../assets/images'
+import images from '../../assets/images'
+import { state } from '../../store'
 import styles from './Live2d.module.css'
 
 function Live2d() {
-  const { live2dID } = store.useContainer()
+  const { live2dID } = useSnapshot(state)
   const id = parseInt(live2dID)
+  
   useEffect(() => {
     let model = '/live2d/models/'
     if (id > 2 && window.loadlive2d) {
@@ -29,7 +31,7 @@ function Live2d() {
       model += '/model.json'
       window.loadlive2d('live2d', model)
     }
-  }, [id])
+  }, [live2dID])
 
   const imageStyles = clsx(styles.staticImage, {
     [styles.image0]: id === 0,

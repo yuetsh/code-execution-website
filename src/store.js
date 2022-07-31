@@ -1,195 +1,173 @@
-import { useState, useRef } from 'react'
-import { createContainer } from 'unstated-next'
-import { useMonaco } from '@monaco-editor/react'
+import { proxy } from 'valtio'
 import { Modal, message } from 'antd'
 import { createSubmission, getOJProblem } from './api'
 import { sources } from './assets/templates'
 import themeList from './assets/themelist.json'
 
-function useStore() {
-  const monaco = useMonaco()
-  const theme = localStorage.getItem("theme") || "vs-dark"
-  const TOTAL_GIRLS = 7
+let sourceEditorRef = null
+let stdinEditorRef = null
+let stdoutEditorRef = null
 
-  let isEditorDirty = false
+const TOTAL_GIRLS = 7
 
-  let cachedThemes = {}
-  if (localStorage.getItem("themesData")) {
-    cachedThemes = JSON.parse(localStorage.getItem("themesData"))
-  }
+let isEditorDirty = false
+let cachedThemes = {}
 
-  const sourceEditorRef = useRef(null)
-  const stdinEditorRef = useRef(null)
-  const stdoutEditorRef = useRef(null)
+if (localStorage.getItem("themesData")) {
+  cachedThemes = JSON.parse(localStorage.getItem("themesData"))
+}
 
+export const state = proxy({
+  theme: localStorage.getItem("theme") || "vs-dark",
+  fontSize: localStorage.getItem("fontsize") || window.innerWidth > 800 ? 24 : 14,
+  languageID: localStorage.getItem("language_id") || "50",
+  status: null,
+  runBtnLoading: false,
+  header: {
+    primary: themeList[localStorage.getItem("theme") || "vs-dark"].primary,
+    type: themeList[localStorage.getItem("theme") || "vs-dark"].type,
+  },
+  live2dID: localStorage.getItem("live2d_id") || "-1",
+  showSettings: false
+})
 
-  const [fontSize, setFontSize] = useState(localStorage.getItem("fontsize") || 24)
-  const [languageID, setLanguageID] = useState(localStorage.getItem("language_id") || "50")
-  const [status, setStatus] = useState(null)
-  const [runBtnLoading, setRunBtnLoading] = useState(false)
-  const [header, setHeader] = useState({
-    primary: themeList[theme].primary,
-    type: themeList[theme].type,
+const config = {
+  fontSize: state.fontSize,
+  minimap: { enabled: false },
+  automaticLayout: true,
+  scrollBeyondLastLine: false,
+  lineNumbers: "off",
+  autoIndent: true,
+  tabSize: 4,
+}
+
+function changeLanguage(idString) {
+  state.languageID = idString
+  sourceEditorRef.setValue(sources[parseInt(idString)])
+  localStorage.setItem("language_id", idString)
+  localStorage.removeItem("code_record")
+}
+
+export function sourceEditorDidMount(editor) {
+  sourceEditorRef = editor
+  editor.focus()
+  editor.updateOptions({
+    ...config,
+    scrollBeyondLastLine: true,
+    lineNumbers: "on"
   })
-  const [live2dID, setLive2dID] = useState(localStorage.getItem("live2d_id") || "-1")
-  const config = {
-    fontSize,
-    minimap: { enabled: false },
-    automaticLayout: true,
-    scrollBeyondLastLine: false,
-    lineNumbers: "off",
-    autoIndent: true,
-    tabSize: 4
-  }
-
-  function sourceEditorDidMount(editor) {
-    sourceEditorRef.current = editor
-    editor.focus()
-    editor.updateOptions({
-      ...config,
-      scrollBeyondLastLine: true,
-      lineNumbers: "on"
-    })
-    const codeRecord = localStorage.getItem("code_record") || ""
-    if (codeRecord) {
-      sourceEditorRef.current.setValue(codeRecord)
-    } else {
-      sourceEditorRef.current.setValue(sources[parseInt(languageID)])
-    }
-  }
-
-  function stdinEditorDidMount(editor) {
-    stdinEditorRef.current = editor
-    editor.updateOptions(config)
-    const { input, id } = getOJProblem()
-    if (input && id) {
-      editor.setValue(input)
-      changeLanguage(String(id))
-    }
-  }
-
-  function stdoutEditorDidMount(editor) {
-    stdoutEditorRef.current = editor
-    editor.updateOptions({ ...config, readOnly: true })
-  }
-
-  function changeFontSize(value) {
-    setFontSize(value)
-    sourceEditorRef.current.updateOptions({ fontSize: value })
-    stdinEditorRef.current.updateOptions({ fontSize: value })
-    stdoutEditorRef.current.updateOptions({ fontSize: value })
-    localStorage.setItem("fontsize", value)
-  }
-
-  async function changeTheme(value) {
-    if (["vs-dark", "vs-light"].indexOf(value) !== -1) {
-      monaco.editor.setTheme(value)
-    } else {
-      if (cachedThemes[value]) {
-        monaco.editor.defineTheme(value, cachedThemes[value])
-        monaco.editor.setTheme(value)
-      } else {
-        const r = await fetch(`/themes/${themeList[value].file}.json`)
-        const data = await r.json()
-        monaco.editor.defineTheme(value, data)
-        monaco.editor.setTheme(value)
-        cachedThemes[value] = data
-        localStorage.setItem("themesData", JSON.stringify(cachedThemes))
-      }
-    }
-    localStorage.setItem("theme", value)
-    setHeader({ primary: themeList[value].primary, type: themeList[value].type })
-  }
-
-  function changeLanguage(idString) {
-    setLanguageID(idString)
-    sourceEditorRef.current.setValue(sources[parseInt(idString)])
-    localStorage.setItem("language_id", idString)
-    localStorage.removeItem("code_record")
-  }
-
-  function restore() {
-    changeLanguage(languageID)
-    message.success("代码重置成功")
-  }
-
-  function switchLanguage(value) {
-    isEditorDirty = sourceEditorRef.current.getValue() !== sources[parseInt(languageID)]
-    if (isEditorDirty) {
-      Modal.confirm({
-        title: "警告",
-        content: "代码已被你修改过了，切换语言会删掉你写的代码，你确定要切换语言吗？",
-        okText: "确定",
-        cancelText: "取消",
-        maskClosable: true,
-        onOk() {
-      changeLanguage(value)
-        }
-      })
-    } else {
-      changeLanguage(value)
-    }
-  }
-
-  function changeSource(value) {
-    isEditorDirty = value !== sources[parseInt(languageID)]
-    if (isEditorDirty) {
-      localStorage.setItem("code_record", value)
-    } else {
-      localStorage.removeItem("code_record")
-    }
-  }
-
-  async function run() {
-    setStatus(null)
-    setRunBtnLoading(true)
-    const content = sourceEditorRef.current.getValue().trim()
-    if (!content) return
-    stdoutEditorRef.current.setValue("")
-    const stdinValue = stdinEditorRef.current.getValue().trim()
-    const data = await createSubmission(content, stdinValue, parseInt(languageID))
-    stdoutEditorRef.current.setValue(data.output)
-    setStatus(data.status)
-    setRunBtnLoading(false)
-  }
-
-  function changeLive2d() {
-    const idString = parseInt(live2dID) >= TOTAL_GIRLS - 1 ? '-1' : String(parseInt(live2dID) + 1)
-    setLive2dID(idString)
-    localStorage.setItem('live2d_id', idString)
-  }
-
-  async function copy() {
-    try {
-      await navigator.clipboard.writeText(sourceEditorRef.current.getValue())
-      message.success("代码复制成功")
-    } catch (e) {
-      message.error("代码复制失败")
-    }
-  }
-
-
-  return {
-    monaco,
-    theme,
-    fontSize,
-    languageID,
-    status,
-    runBtnLoading,
-    header,
-    live2dID,
-    sourceEditorDidMount,
-    stdinEditorDidMount,
-    stdoutEditorDidMount,
-    changeFontSize,
-    changeTheme,
-    restore,
-    switchLanguage,
-    changeSource,
-    run,
-    changeLive2d,
-    copy
+  const codeRecord = localStorage.getItem("code_record") || ""
+  if (codeRecord) {
+    sourceEditorRef.setValue(codeRecord)
+  } else {
+    sourceEditorRef.setValue(sources[parseInt(state.languageID)])
   }
 }
 
-export default createContainer(useStore)
+export function stdinEditorDidMount(editor) {
+  stdinEditorRef = editor
+  editor.updateOptions(config)
+  const { input, id } = getOJProblem()
+  if (input && id) {
+    editor.setValue(input)
+    changeLanguage(String(id))
+  }
+}
+
+export function stdoutEditorDidMount(editor) {
+  stdoutEditorRef = editor
+  editor.updateOptions({ ...config, readOnly: true })
+}
+
+export function onFontSize(value) {
+  state.fontSize = value
+  sourceEditorRef.updateOptions({ fontSize: value })
+  stdinEditorRef.updateOptions({ fontSize: value })
+  stdoutEditorRef.updateOptions({ fontSize: value })
+  localStorage.setItem("fontsize", value)
+}
+
+export async function onTheme(monaco, value) {
+  state.theme = value
+  if (["vs-dark", "vs-light"].indexOf(value) !== -1) {
+    monaco.editor.setTheme(value)
+  } else {
+    if (cachedThemes[value]) {
+      monaco.editor.defineTheme(value, cachedThemes[value])
+      monaco.editor.setTheme(value)
+    } else {
+      const r = await fetch(`/themes/${themeList[value].file}.json`)
+      const data = await r.json()
+      monaco.editor.defineTheme(value, data)
+      monaco.editor.setTheme(value)
+      cachedThemes[value] = data
+      localStorage.setItem("themesData", JSON.stringify(cachedThemes))
+    }
+  }
+  localStorage.setItem("theme", value)
+  state.header = { primary: themeList[value].primary, type: themeList[value].type }
+}
+
+export function onRestore() {
+  changeLanguage(state.languageID)
+  message.success("代码重置成功")
+}
+
+export function onLanguage(value) {
+  isEditorDirty = sourceEditorRef.getValue() !== sources[parseInt(state.languageID)]
+  if (isEditorDirty) {
+    Modal.confirm({
+      title: "警告",
+      content: "代码已被你修改过了，切换语言会删掉你写的代码，你确定要切换语言吗？",
+      okText: "确定",
+      cancelText: "取消",
+      maskClosable: true,
+      onOk() {
+        changeLanguage(value)
+      }
+    })
+  } else {
+    changeLanguage(value)
+  }
+}
+
+export function onSource(value) {
+  isEditorDirty = value !== sources[parseInt(state.languageID)]
+  if (isEditorDirty) {
+    localStorage.setItem("code_record", value)
+  } else {
+    localStorage.removeItem("code_record")
+  }
+}
+
+export async function run() {
+  state.status = null
+  state.runBtnLoading = true
+  const content = sourceEditorRef.getValue().trim()
+  if (!content) return
+  stdoutEditorRef.setValue("")
+  const stdinValue = stdinEditorRef.getValue().trim()
+  const data = await createSubmission(content, stdinValue, parseInt(state.languageID))
+  stdoutEditorRef.setValue(data.output)
+  state.status = data.status
+  state.runBtnLoading = false
+}
+
+export function onLive2d() {
+  const idString = parseInt(state.live2dID) >= TOTAL_GIRLS - 1 ? '-1' : String(parseInt(state.live2dID) + 1)
+  state.live2dID = idString
+  localStorage.setItem('live2d_id', idString)
+}
+
+export async function copy() {
+  try {
+    await navigator.clipboard.writeText(sourceEditorRef.getValue())
+    message.success("代码复制成功")
+  } catch (e) {
+    message.error("代码复制失败")
+  }
+}
+
+export function toggleSettings() {
+  state.showSettings = !state.showSettings
+}

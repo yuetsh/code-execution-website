@@ -1,29 +1,26 @@
 import React from 'react'
+import { useSnapshot } from 'valtio'
 import Editor from '@monaco-editor/react'
 import { Allotment } from 'allotment'
-import { Row, Spin } from 'antd'
-import { language } from '../assets/templates'
-import store from '../store'
+import { Spin } from 'antd'
+import { language } from '../../assets/templates'
 import styles from './Content.module.css'
+import { state, sourceEditorDidMount, stdinEditorDidMount, stdoutEditorDidMount, onSource } from '../../store'
 
 function Content() {
-  const {
-    languageID,
-    sourceEditorDidMount,
-    stdinEditorDidMount,
-    stdoutEditorDidMount,
-    changeSource,
-  } = store.useContainer()
+  const { languageID, theme } = useSnapshot(state)
+  
   return (
-    <Row className={styles.content}>
+    <div className={styles.content}>
       <Allotment defaultSizes={[2, 1]}>
         <Allotment.Pane>
           <Editor
             defaultLanguage={language[languageID]}
             language={language[languageID]}
             onMount={sourceEditorDidMount}
-            onChange={changeSource}
+            onChange={onSource}
             loading={<Spin />}
+            theme={theme}
           />
         </Allotment.Pane>
         <Allotment.Pane>
@@ -34,6 +31,7 @@ function Content() {
                 defaultValue="输入信息"
                 onMount={stdinEditorDidMount}
                 loading={<Spin />}
+                theme={theme}
               />
             </Allotment.Pane>
             <Allotment.Pane>
@@ -42,12 +40,13 @@ function Content() {
                 defaultValue="输出信息"
                 onMount={stdoutEditorDidMount}
                 loading={<Spin />}
+                theme={theme}
               />
             </Allotment.Pane>
           </Allotment>
         </Allotment.Pane>
       </Allotment>
-    </Row >
+    </div >
   )
 }
 
