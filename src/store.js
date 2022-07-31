@@ -1,5 +1,6 @@
 import { proxy } from 'valtio'
 import { Modal, message } from 'antd'
+import copyText from 'copy-text-to-clipboard'
 import { createSubmission, getOJProblem } from './api'
 import { sources } from './assets/templates'
 import themeList from './assets/themelist.json'
@@ -19,7 +20,7 @@ if (localStorage.getItem("themesData")) {
 
 export const state = proxy({
   theme: localStorage.getItem("theme") || "vs-dark",
-  fontSize: localStorage.getItem("fontsize") || window.innerWidth > 800 ? 24 : 14,
+  fontSize: localStorage.getItem("fontsize") || window.innerWidth > 800 ? 24 : 16,
   languageID: localStorage.getItem("language_id") || "50",
   status: null,
   runBtnLoading: false,
@@ -159,13 +160,9 @@ export function onLive2d() {
   localStorage.setItem('live2d_id', idString)
 }
 
-export async function copy() {
-  try {
-    await navigator.clipboard.writeText(sourceEditorRef.getValue())
-    message.success("代码复制成功")
-  } catch (e) {
-    message.error("代码复制失败")
-  }
+export function copy() {
+  copyText(sourceEditorRef.getValue())
+  message.success("代码复制成功")
 }
 
 export function toggleSettings() {
