@@ -13,9 +13,7 @@ loader.config({
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(
-  <React.StrictMode>
-    <Store.Provider>
-      <App />
-    </Store.Provider>
-  </React.StrictMode>
+  <Store.Provider>
+    <App />
+  </Store.Provider>
 )
