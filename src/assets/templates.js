@@ -1,31 +1,7 @@
-export const cSource =
-    `#include<stdio.h>
-
-int main()
-{
-    printf("黄岩一职");
-    return 0;
-}`
-
-export const cppSource =
-    `#include<iostream>
-
-using namespace std;
-
-int main()
-{
-    cout<<"黄岩一职"<<endl;
-    return 0;
-}`
-
-export const javaSource =
-    `public class Main {
-    public static void main(String[] args) {
-        System.out.println("黄岩一职");
-    }
-}`
-
-export const pythonSource = `print("黄岩一职")`;
+export const cSource = '#include<stdio.h>\r\n\r\nint main()\r\n{\r\n    printf("黄岩一职");\r\n    return 0;\r\n}'
+export const cppSource = '#include<iostream>\r\n\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    cout<<"黄岩一职"<<endl;\r\n    return 0;\r\n}'
+export const pythonSource = 'print("黄岩一职")'
+export const javaSource = 'public class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println("黄岩一职");\r\n    }\r\n}'
 
 export const sources = {
     50: cSource,
@@ -50,23 +26,16 @@ export const filename = {
 
 export const submissionBase64 = {
     50: {
-        sourceBase64: "I2luY2x1ZGU8c3RkaW8uaD4KCmludCBtYWluKCkKewogICAgcHJpbnRmKCLpu4TlsqnkuIDogYwiKTsKICAgIHJldHVybiAwOwp9",
+        sourceBase64: "I2luY2x1ZGU8c3RkaW8uaD4NCg0KaW50IG1haW4oKQ0Kew0KICAgIHByaW50Zigi6buE5bKp5LiA6IGMIik7DQogICAgcmV0dXJuIDA7DQp9",
         result: {
             status: { id: 3, msg: "Accepted, 4ms, 1MB" },
             output: "黄岩一职"
         }
     },
     54: {
-        sourceBase64: "I2luY2x1ZGU8aW9zdHJlYW0+Cgp1c2luZyBuYW1lc3BhY2Ugc3RkOwoKaW50IG1haW4oKQp7CiAgICBjb3V0PDwi6buE5bKp5LiA6IGMIjw8ZW5kbDsKICAgIHJldHVybiAwOwp9",
+        sourceBase64: "I2luY2x1ZGU8aW9zdHJlYW0+DQoNCnVzaW5nIG5hbWVzcGFjZSBzdGQ7DQoNCmludCBtYWluKCkNCnsNCiAgICBjb3V0PDwi6buE5bKp5LiA6IGMIjw8ZW5kbDsNCiAgICByZXR1cm4gMDsNCn0=",
         result: {
             status: { id: 3, msg: "Accepted, 5ms, 1MB" },
-            output: "黄岩一职"
-        }
-    },
-    62: {
-        sourceBase64: "cHVibGljIGNsYXNzIE1haW4gewogICAgcHVibGljIHN0YXRpYyB2b2lkIG1haW4oU3RyaW5nW10gYXJncykgewogICAgICAgIFN5c3RlbS5vdXQucHJpbnRsbigi6buE5bKp5LiA6IGMIik7CiAgICB9Cn0=",
-        result: {
-            status: { id: 3, msg: "Accepted, 48ms, 10MB" },
             output: "黄岩一职"
         }
     },
@@ -74,6 +43,13 @@ export const submissionBase64 = {
         sourceBase64: "cHJpbnQoIum7hOWyqeS4gOiBjCIp",
         result: {
             status: { id: 3, msg: "Accepted, 18ms, 3MB" },
+            output: "黄岩一职"
+        }
+    },
+    62: {
+        sourceBase64: "cHVibGljIGNsYXNzIE1haW4gew0KICAgIHB1YmxpYyBzdGF0aWMgdm9pZCBtYWluKFN0cmluZ1tdIGFyZ3MpIHsNCiAgICAgICAgU3lzdGVtLm91dC5wcmludGxuKCLpu4TlsqnkuIDogYwiKTsNCiAgICB9DQp9",
+        result: {
+            status: { id: 3, msg: "Accepted, 48ms, 10MB" },
             output: "黄岩一职"
         }
     },

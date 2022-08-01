@@ -4,14 +4,14 @@
     flex-direction: column;
 }
 
-.content>section:nth-child(1) {
+.source {
     flex: 2;
 }
 
-.content>section:nth-child(2) {
+.stdin {
     flex: 1;
 }
 
-.content>section:nth-child(3) {
+.stdout {
     flex: 1;
 }

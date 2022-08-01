@@ -32,12 +32,6 @@
     position: relative;
 }
 
-@media (max-width: 800px) {
-    .live2dCanvasContainer {
-        display: none;
-    }
-}
-
 .wanko {
     right: -60px;
     bottom: -70px;

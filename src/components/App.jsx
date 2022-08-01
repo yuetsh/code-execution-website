@@ -1,29 +1,16 @@
-import { useState, useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Desktop from "./desktop"
 import Mobile from "./mobile"
-
-function useWidth() {
-    const [width, setWidth] = useState(null)
-
-    const updateWidth = useCallback(() => {
-        if (window) {
-            setWidth(window.innerWidth)
-        }
-    }, [])
-
-    useEffect(() => {
-        updateWidth()
-        window.addEventListener('resize', updateWidth)
-        return () => {
-            window.removeEventListener('resize', updateWidth)
-        }
-    }, [updateWidth])
-
-    return [width]
-}
+import { useWindowWidth } from '../utils'
+import { state } from '../store'
 
 function App() {
-    const width = useWidth()
+    const width = useWindowWidth()
+    state.fontSize = width > 800 ? (localStorage.getItem("fontsize") || 24) : 16
+    useEffect(() => {
+        state.fontSize = width > 800 ? (localStorage.getItem("fontsize") || 24) : 16
+    }, [width])
+
     if (width > 800) {
         return <Desktop />
     } else {

@@ -5,10 +5,6 @@ import { createSubmission, getOJProblem } from './api'
 import { sources } from './assets/templates'
 import themeList from './assets/themelist.json'
 
-let sourceEditorRef = null
-let stdinEditorRef = null
-let stdoutEditorRef = null
-
 const TOTAL_GIRLS = 7
 
 let isEditorDirty = false
@@ -18,73 +14,53 @@ if (localStorage.getItem("themesData")) {
   cachedThemes = JSON.parse(localStorage.getItem("themesData"))
 }
 
+const defaultTheme = localStorage.getItem("theme") || "dracula"
+
 export const state = proxy({
-  theme: localStorage.getItem("theme") || "vs-dark",
-  fontSize: localStorage.getItem("fontsize") || window.innerWidth > 800 ? 24 : 16,
+  sourceValue: '',
+  stdinValue: '输入信息',
+  stdoutValue: '输出信息',
+  theme: defaultTheme,
+  fontSize: 12,
   languageID: localStorage.getItem("language_id") || "50",
   status: null,
   runBtnLoading: false,
   header: {
-    primary: themeList[localStorage.getItem("theme") || "vs-dark"].primary,
-    type: themeList[localStorage.getItem("theme") || "vs-dark"].type,
+    primary: themeList[defaultTheme].primary,
+    type: themeList[defaultTheme].type,
   },
   live2dID: localStorage.getItem("live2d_id") || "-1",
   showSettings: false
 })
 
-const config = {
-  fontSize: state.fontSize,
-  minimap: { enabled: false },
-  automaticLayout: true,
-  scrollBeyondLastLine: false,
-  lineNumbers: "off",
-  autoIndent: true,
-  tabSize: 4,
-}
-
 function changeLanguage(idString) {
   state.languageID = idString
-  sourceEditorRef.setValue(sources[parseInt(idString)])
+  state.sourceValue = sources[parseInt(idString)]
   localStorage.setItem("language_id", idString)
   localStorage.removeItem("code_record")
 }
 
 export function sourceEditorDidMount(editor) {
-  sourceEditorRef = editor
   editor.focus()
-  editor.updateOptions({
-    ...config,
-    scrollBeyondLastLine: window.innerWidth > 890 ? true : false,
-    lineNumbers: window.innerWidth > 890 ? "on" : "off"
-  })
   const codeRecord = localStorage.getItem("code_record") || ""
   if (codeRecord) {
-    sourceEditorRef.setValue(codeRecord)
+    state.sourceValue = codeRecord
   } else {
-    sourceEditorRef.setValue(sources[parseInt(state.languageID)])
+    state.sourceValue = sources[parseInt(state.languageID)]
   }
 }
 
-export function stdinEditorDidMount(editor) {
-  stdinEditorRef = editor
-  editor.updateOptions(config)
+export function stdinEditorDidMount() {
   const { input, id } = getOJProblem()
   if (input && id) {
-    editor.setValue(input)
-    changeLanguage(String(id))
+    state.stdinValue = input
+    state.languageID = String(id)
+    localStorage.setItem("language_id", String(id))
   }
-}
-
-export function stdoutEditorDidMount(editor) {
-  stdoutEditorRef = editor
-  editor.updateOptions({ ...config, readOnly: true })
 }
 
 export function onFontSize(value) {
   state.fontSize = value
-  sourceEditorRef.updateOptions({ fontSize: value })
-  stdinEditorRef.updateOptions({ fontSize: value })
-  stdoutEditorRef.updateOptions({ fontSize: value })
   localStorage.setItem("fontsize", value)
 }
 
@@ -115,7 +91,7 @@ export function onRestore() {
 }
 
 export function onLanguage(value) {
-  isEditorDirty = sourceEditorRef.getValue() !== sources[parseInt(state.languageID)]
+  isEditorDirty = state.sourceValue !== sources[parseInt(state.languageID)]
   if (isEditorDirty) {
     Modal.confirm({
       title: "警告",
@@ -133,23 +109,23 @@ export function onLanguage(value) {
 }
 
 export function onSource(value) {
-  isEditorDirty = value !== sources[parseInt(state.languageID)]
-  if (isEditorDirty) {
-    localStorage.setItem("code_record", value)
-  } else {
-    localStorage.removeItem("code_record")
-  }
+  state.sourceValue = value
+  localStorage.setItem("code_record", value)
+}
+
+export function onStdin(value) {
+  state.stdinValue = value
 }
 
 export async function run() {
   state.status = null
   state.runBtnLoading = true
-  const content = sourceEditorRef.getValue().trim()
-  if (!content) return
-  stdoutEditorRef.setValue("")
-  const stdinValue = stdinEditorRef.getValue().trim()
-  const data = await createSubmission(content, stdinValue, parseInt(state.languageID))
-  stdoutEditorRef.setValue(data.output)
+  const sourceValue = state.sourceValue.trim()
+  if (!sourceValue) return
+  state.stdoutValue = ""
+  const stdinValue = state.stdinValue.trim()
+  const data = await createSubmission(sourceValue, stdinValue, parseInt(state.languageID))
+  state.stdoutValue = data.output
   state.status = data.status
   state.runBtnLoading = false
 }
@@ -161,7 +137,7 @@ export function onLive2d() {
 }
 
 export function copy() {
-  copyText(sourceEditorRef.getValue())
+  copyText(state.sourceValue)
   message.success("代码复制成功")
 }
 
