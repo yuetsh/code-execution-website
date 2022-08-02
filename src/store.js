@@ -9,8 +9,8 @@ const TOTAL_GIRLS = 7
 
 let cachedThemes = {}
 
-if (localStorage.getItem("themesData")) {
-  cachedThemes = JSON.parse(localStorage.getItem("themesData"))
+if (localStorage.getItem("themes")) {
+  cachedThemes = JSON.parse(localStorage.getItem("themes"))
 }
 
 const defaultTheme = localStorage.getItem("theme") || "dracula"
@@ -67,7 +67,7 @@ export async function onTheme(monaco, value) {
       monaco.editor.defineTheme(value, data)
       monaco.editor.setTheme(value)
       cachedThemes[value] = data
-      localStorage.setItem("themesData", JSON.stringify(cachedThemes))
+      localStorage.setItem("themes", JSON.stringify(cachedThemes))
     }
   }
   localStorage.setItem("theme", value)

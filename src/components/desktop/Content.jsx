@@ -26,7 +26,7 @@ function Content() {
           />
         </Allotment.Pane>
         <Allotment.Pane>
-          <Allotment vertical>
+          <Allotment vertical defaultSizes={[1, 2]}>
             <Allotment.Pane>
               <Editor
                 value={stdinValue}
