@@ -1,13 +1,12 @@
 import { proxy } from 'valtio'
-import { Modal, message } from 'antd'
+import { message } from 'antd'
 import copyText from 'copy-text-to-clipboard'
 import { createSubmission, getOJProblem } from './api'
-import { sources } from './assets/templates'
+import { language, sources } from './assets/templates'
 import themeList from './assets/themelist.json'
 
 const TOTAL_GIRLS = 7
 
-let isEditorDirty = false
 let cachedThemes = {}
 
 if (localStorage.getItem("themesData")) {
@@ -33,21 +32,12 @@ export const state = proxy({
   showSettings: false
 })
 
-function changeLanguage(idString) {
-  state.languageID = idString
-  state.sourceValue = sources[parseInt(idString)]
-  localStorage.setItem("language_id", idString)
-  localStorage.removeItem("code_record")
-}
-
 export function sourceEditorDidMount(editor) {
   editor.focus()
-  const codeRecord = localStorage.getItem("code_record") || ""
-  if (codeRecord) {
-    state.sourceValue = codeRecord
-  } else {
-    state.sourceValue = sources[parseInt(state.languageID)]
-  }
+  const record = localStorage.getItem('code_' + language[state.languageID])
+  state.sourceValue = record || sources[state.languageID]
+  localStorage.setItem('code_' + language[state.languageID], state.sourceValue)
+  localStorage.setItem('language_id', state.languageID)
 }
 
 export function stdinEditorDidMount() {
@@ -86,31 +76,22 @@ export async function onTheme(monaco, value) {
 }
 
 export function onRestore() {
-  changeLanguage(state.languageID)
+  state.sourceValue = sources[state.languageID]
+  localStorage.removeItem('code_' + language[state.languageID])
   message.success("代码重置成功")
 }
 
 export function onLanguage(value) {
-  isEditorDirty = state.sourceValue !== sources[parseInt(state.languageID)]
-  if (isEditorDirty) {
-    Modal.confirm({
-      title: "警告",
-      content: "代码已被你修改过了，切换语言会删掉你写的代码，你确定要切换语言吗？",
-      okText: "确定",
-      cancelText: "取消",
-      maskClosable: true,
-      onOk() {
-        changeLanguage(value)
-      }
-    })
-  } else {
-    changeLanguage(value)
-  }
+  state.languageID = value
+  localStorage.setItem("language_id", value)
+  const record = localStorage.getItem('code_' + language[value])
+  state.sourceValue = record || sources[value]
+  localStorage.setItem('code_' + language[value], state.sourceValue)
 }
 
 export function onSource(value) {
   state.sourceValue = value
-  localStorage.setItem("code_record", value)
+  localStorage.setItem("code_" + language[state.languageID], value)
 }
 
 export function onStdin(value) {

@@ -22,9 +22,9 @@ function Header() {
             <span>语言：</span>
             <Radio.Group size="large" value={languageID} buttonStyle="solid" onChange={e => onLanguage(e.target.value)}>
               <Radio.Button value="50" style={{ width: 44, textAlign: 'center' }}>C</Radio.Button>
-              <Radio.Button value="54">C++</Radio.Button>
+              <Radio.Button value="54" style={{ width: 44, textAlign: 'center' }}>C++</Radio.Button>
               <Radio.Button value="71">Python</Radio.Button>
-              <Radio.Button value="62">Java</Radio.Button>
+              <Radio.Button value="62" style={{ width: 44, textAlign: 'center' }}>Java</Radio.Button>
             </Radio.Group>
           </Row>
           <Row align="middle">

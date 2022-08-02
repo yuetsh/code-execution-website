@@ -23,6 +23,7 @@ function Content() {
           theme={theme}
           options={{ ...monacoConfig, fontSize, lineNumbers: false, scrollBeyondLastColumn: false }}
         />
+        <InputHelper />
       </div>
       <div className={styles.stdin}>
         <Editor
