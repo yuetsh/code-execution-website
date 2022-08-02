@@ -17,39 +17,28 @@ export const language = {
     71: "python"
 }
 
-export const filename = {
-    50: "main.c",
-    54: "main.cpp",
-    62: "Main.java",
-    71: "script.py"
-}
-
-export const submissionBase64 = {
+export const deadResults = {
     50: {
-        sourceBase64: "I2luY2x1ZGU8c3RkaW8uaD4NCg0KaW50IG1haW4oKQ0Kew0KICAgIHByaW50Zigi6buE5bKp5LiA6IGMIik7DQogICAgcmV0dXJuIDA7DQp9",
+        encoded: "I2luY2x1ZGU8c3RkaW8uaD4NCg0KaW50IG1haW4oKQ0Kew0KICAgIHByaW50Zigi6buE5bKp5LiA6IGMIik7DQogICAgcmV0dXJuIDA7DQp9",
         result: {
-            status: { id: 3, msg: "Accepted, 4ms, 1MB" },
             output: "黄岩一职"
         }
     },
     54: {
-        sourceBase64: "I2luY2x1ZGU8aW9zdHJlYW0+DQoNCnVzaW5nIG5hbWVzcGFjZSBzdGQ7DQoNCmludCBtYWluKCkNCnsNCiAgICBjb3V0PDwi6buE5bKp5LiA6IGMIjw8ZW5kbDsNCiAgICByZXR1cm4gMDsNCn0=",
+        encoded: "I2luY2x1ZGU8aW9zdHJlYW0+DQoNCnVzaW5nIG5hbWVzcGFjZSBzdGQ7DQoNCmludCBtYWluKCkNCnsNCiAgICBjb3V0PDwi6buE5bKp5LiA6IGMIjw8ZW5kbDsNCiAgICByZXR1cm4gMDsNCn0=",
         result: {
-            status: { id: 3, msg: "Accepted, 5ms, 1MB" },
             output: "黄岩一职"
         }
     },
     71: {
-        sourceBase64: "cHJpbnQoIum7hOWyqeS4gOiBjCIp",
+        encoded: "cHJpbnQoIum7hOWyqeS4gOiBjCIp",
         result: {
-            status: { id: 3, msg: "Accepted, 18ms, 3MB" },
             output: "黄岩一职"
         }
     },
     62: {
         sourceBase64: "cHVibGljIGNsYXNzIE1haW4gew0KICAgIHB1YmxpYyBzdGF0aWMgdm9pZCBtYWluKFN0cmluZ1tdIGFyZ3MpIHsNCiAgICAgICAgU3lzdGVtLm91dC5wcmludGxuKCLpu4TlsqnkuIDogYwiKTsNCiAgICB9DQp9",
         result: {
-            status: { id: 3, msg: "Accepted, 48ms, 10MB" },
             output: "黄岩一职"
         }
     },

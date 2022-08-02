@@ -1,5 +1,5 @@
 import qs from 'query-string'
-import { submissionBase64 } from './assets/templates'
+import { deadResults } from './assets/templates'
 
 const BASE_URL = "https://judge0api.hyyz.izhai.net"
 
@@ -19,9 +19,8 @@ function decode(bytes) {
 export async function createSubmission(code, stdin, id) {
     const encodedCode = encode(code)
     id = parseInt(id)
-    // 避免模板代码的网络请求
-    if (encodedCode === submissionBase64[id].sourceBase64) {
-        return submissionBase64[id].result
+    if (encodedCode === deadResults[id].encoded) {
+        return deadResults[id].result
     } else {
         let compilerOptions = ''
         if (id === 50) compilerOptions = '-lm' // 解决 GCC 的链接问题
@@ -34,18 +33,14 @@ export async function createSubmission(code, stdin, id) {
         }
         try {
             const response = await fetch(`${BASE_URL}/submissions?base64_encoded=true&wait=true`, {
-                method: "POST",
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(payload)
             })
             const data = await response.json()
-            const memory = (data.memory === null ? "-" : parseInt(data.memory / 1024) + "MB")
-            const time = (data.time === null ? "-" : data.time * 1000 + "ms")
-            // console.log("Token 是", data.token)
             return {
-                status: { id: data.status.id, msg: `${data.status.description}, ${time}, ${memory}` },
                 output: [decode(data.compile_output), decode(data.stdout)].join("\n").trim(),
             }
         } catch (e) {

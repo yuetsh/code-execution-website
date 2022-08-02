@@ -1,9 +1,9 @@
-import { PageHeader, Button, Select, Tag, InputNumber } from 'antd'
+import { PageHeader, Button, Select, InputNumber } from 'antd'
 import { useSnapshot } from 'valtio'
+import { useMonaco } from '@monaco-editor/react'
 import { CaretRightOutlined } from '@ant-design/icons'
 import themeList from '../../assets/themelist.json'
 import { state, onFontSize, onTheme, onRestore, onLanguage, onLive2d, copy, run } from '../../store'
-import { useMonaco } from '@monaco-editor/react'
 
 const { Option } = Select
 
@@ -13,7 +13,6 @@ function Header() {
     theme,
     fontSize,
     languageID,
-    status,
     runBtnLoading,
     header
   } = useSnapshot(state)
@@ -24,7 +23,6 @@ function Header() {
     <PageHeader
       title={<span style={{ color: header.type === "dark" ? "white" : "black" }}>徐越的自测猫</span>}
       extra={[
-        <Tag key="status" visible={!!status} color={status && status.id === 3 ? "success" : "warning"}>{status && status.msg}</Tag>,
         <Select disabled={!monaco} key="theme" style={{ width: 160 }} value={theme} onChange={val => onTheme(monaco, val)}>
           {Object.keys(themeList).map(it => <Option key={it} value={it}>{"主题：" + themeList[it].file}</Option>)}
         </Select>,

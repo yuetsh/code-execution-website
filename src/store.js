@@ -22,7 +22,6 @@ export const state = proxy({
   theme: defaultTheme,
   fontSize: 12,
   languageID: localStorage.getItem("language_id") || "50",
-  status: null,
   runBtnLoading: false,
   header: {
     primary: themeList[defaultTheme].primary,
@@ -78,6 +77,7 @@ export async function onTheme(monaco, value) {
 export function onRestore() {
   state.sourceValue = sources[state.languageID]
   localStorage.removeItem('code_' + language[state.languageID])
+  state.stdoutValue = '输出信息'
   message.success("代码重置成功")
 }
 
@@ -87,6 +87,7 @@ export function onLanguage(value) {
   const record = localStorage.getItem('code_' + language[value])
   state.sourceValue = record || sources[value]
   localStorage.setItem('code_' + language[value], state.sourceValue)
+  state.stdoutValue = '输出信息'
 }
 
 export function onSource(value) {
@@ -99,7 +100,6 @@ export function onStdin(value) {
 }
 
 export async function run() {
-  state.status = null
   state.runBtnLoading = true
   const sourceValue = state.sourceValue.trim()
   if (!sourceValue) return
@@ -107,7 +107,6 @@ export async function run() {
   const stdinValue = state.stdinValue.trim()
   const data = await createSubmission(sourceValue, stdinValue, parseInt(state.languageID))
   state.stdoutValue = data.output
-  state.status = data.status
   state.runBtnLoading = false
 }
 
