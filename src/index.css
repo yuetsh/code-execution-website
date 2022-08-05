@@ -7,16 +7,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: url(./assets/Arrow.cur), default;
-}
-
-.ant-select:hover,
-.ant-select-item-option:hover,
-button:hover {
-  cursor: url(./assets/Hand.cur), pointer;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media screen and (min-width: 800px) {
+  body {
+    cursor: url(./assets/Arrow.cur), default;
+  }
+
+  .ant-select:hover,
+  .ant-select-item-option:hover,
+  button:hover {
+    cursor: url(./assets/Hand.cur), pointer;
+  }
 }

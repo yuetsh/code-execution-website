@@ -5,6 +5,8 @@ import { createSubmission, getOJProblem } from './api'
 import { language, sources } from './assets/templates'
 import themeList from './assets/themelist.json'
 
+let sourceEditorRef = null
+
 const TOTAL_GIRLS = 7
 
 let cachedThemes = {}
@@ -28,10 +30,11 @@ export const state = proxy({
     type: themeList[defaultTheme].type,
   },
   live2dID: localStorage.getItem("live2d_id") || "-1",
-  showSettings: false
+  showSettings: false,
 })
 
 export function sourceEditorDidMount(editor) {
+  sourceEditorRef = editor
   editor.focus()
   const record = localStorage.getItem('code_' + language[state.languageID])
   state.sourceValue = record || sources[state.languageID]
@@ -123,4 +126,24 @@ export function copy() {
 
 export function toggleSettings() {
   state.showSettings = !state.showSettings
+}
+
+export function onHelper(command) {
+  return function () {
+    sourceEditorRef.trigger('keyboard', 'type', { text: command })
+    const position = sourceEditorRef.getPosition()
+    if (['<>', '()', '""', '\'\'', '[]'].indexOf(command) !== -1) {
+      sourceEditorRef.setPosition({
+        column: position.column - 1,
+        lineNumber: position.lineNumber
+      })
+    }
+    if (['scanf("");', 'printf("");'].indexOf(command) !== -1) {
+      sourceEditorRef.setPosition({
+        column: position.column - 3,
+        lineNumber: position.lineNumber
+      })
+    }
+    sourceEditorRef.focus()
+  }
 }

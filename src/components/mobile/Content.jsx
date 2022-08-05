@@ -3,7 +3,7 @@ import { useSnapshot } from 'valtio'
 import { Spin } from 'antd'
 import Editor from '@monaco-editor/react'
 import styles from './Content.module.css'
-import InputHelper from './InputHelper'
+import Helper from './Helper'
 import { state, sourceEditorDidMount, stdinEditorDidMount, onSource, onStdin } from '../../store'
 import { language } from '../../assets/templates'
 import { monacoConfig } from '../../utils'
@@ -23,7 +23,7 @@ function Content() {
           theme={theme}
           options={{ ...monacoConfig, fontSize, lineNumbers: false, scrollBeyondLastColumn: false }}
         />
-        <InputHelper />
+        <Helper />
       </div>
       <div className={styles.stdin}>
         <Editor
