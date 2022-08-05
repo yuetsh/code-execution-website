@@ -132,7 +132,7 @@ export function onHelper(command) {
   return function () {
     sourceEditorRef.trigger('keyboard', 'type', { text: command })
     const position = sourceEditorRef.getPosition()
-    if (['<>', '()', '""', '\'\'', '[]'].indexOf(command) !== -1) {
+    if (['<>', '()', '""', '\'\'', '[]', 'input()', 'print()'].indexOf(command) !== -1) {
       sourceEditorRef.setPosition({
         column: position.column - 1,
         lineNumber: position.lineNumber
