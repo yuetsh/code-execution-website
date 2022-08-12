@@ -1,9 +1,9 @@
-import { proxy } from 'valtio'
-import { message } from 'antd'
-import copyText from 'copy-text-to-clipboard'
-import { createSubmission, getOJProblem } from './api'
-import { language, sources } from './assets/templates'
-import themeList from './assets/themelist.json'
+import { proxy } from "valtio"
+import { message } from "antd"
+import copyText from "copy-text-to-clipboard"
+import { createSubmission, getOJProblem } from "./api"
+import { language, sources } from "./assets/templates"
+import themeList from "./assets/themelist.json"
 
 let sourceEditorRef = null
 
@@ -18,9 +18,9 @@ if (localStorage.getItem("themes")) {
 const defaultTheme = localStorage.getItem("theme") || "dracula"
 
 export const state = proxy({
-  sourceValue: '',
-  stdinValue: '输入信息',
-  stdoutValue: '输出信息',
+  sourceValue: "",
+  stdinValue: "输入信息",
+  stdoutValue: "输出信息",
   theme: defaultTheme,
   fontSize: 12,
   languageID: localStorage.getItem("language_id") || "50",
@@ -36,10 +36,10 @@ export const state = proxy({
 export function sourceEditorDidMount(editor) {
   sourceEditorRef = editor
   editor.focus()
-  const record = localStorage.getItem('code_' + language[state.languageID])
+  const record = localStorage.getItem("code_" + language[state.languageID])
   state.sourceValue = record || sources[state.languageID]
-  localStorage.setItem('code_' + language[state.languageID], state.sourceValue)
-  localStorage.setItem('language_id', state.languageID)
+  localStorage.setItem("code_" + language[state.languageID], state.sourceValue)
+  localStorage.setItem("language_id", state.languageID)
 }
 
 export function stdinEditorDidMount() {
@@ -74,23 +74,26 @@ export async function onTheme(monaco, value) {
     }
   }
   localStorage.setItem("theme", value)
-  state.header = { primary: themeList[value].primary, type: themeList[value].type }
+  state.header = {
+    primary: themeList[value].primary,
+    type: themeList[value].type,
+  }
 }
 
 export function onRestore() {
   state.sourceValue = sources[state.languageID]
-  localStorage.removeItem('code_' + language[state.languageID])
-  state.stdoutValue = '输出信息'
+  localStorage.removeItem("code_" + language[state.languageID])
+  state.stdoutValue = "输出信息"
   message.success("代码重置成功")
 }
 
 export function onLanguage(value) {
   state.languageID = value
   localStorage.setItem("language_id", value)
-  const record = localStorage.getItem('code_' + language[value])
+  const record = localStorage.getItem("code_" + language[value])
   state.sourceValue = record || sources[value]
-  localStorage.setItem('code_' + language[value], state.sourceValue)
-  state.stdoutValue = '输出信息'
+  localStorage.setItem("code_" + language[value], state.sourceValue)
+  state.stdoutValue = "输出信息"
 }
 
 export function onSource(value) {
@@ -108,15 +111,22 @@ export async function run() {
   if (!sourceValue) return
   state.stdoutValue = ""
   const stdinValue = state.stdinValue.trim()
-  const data = await createSubmission(sourceValue, stdinValue, parseInt(state.languageID))
+  const data = await createSubmission(
+    sourceValue,
+    stdinValue,
+    parseInt(state.languageID)
+  )
   state.stdoutValue = data.output
   state.runBtnLoading = false
 }
 
 export function onLive2d() {
-  const idString = parseInt(state.live2dID) >= TOTAL_GIRLS - 1 ? '-1' : String(parseInt(state.live2dID) + 1)
+  const idString =
+    parseInt(state.live2dID) >= TOTAL_GIRLS - 1
+      ? "-1"
+      : String(parseInt(state.live2dID) + 1)
   state.live2dID = idString
-  localStorage.setItem('live2d_id', idString)
+  localStorage.setItem("live2d_id", idString)
 }
 
 export function copy() {
@@ -130,18 +140,21 @@ export function toggleSettings() {
 
 export function onHelper(command) {
   return function () {
-    sourceEditorRef.trigger('keyboard', 'type', { text: command })
+    sourceEditorRef.trigger("keyboard", "type", { text: command })
     const position = sourceEditorRef.getPosition()
-    if (['<>', '()', '""', '\'\'', '[]', 'input()', 'print()'].indexOf(command) !== -1) {
+    if (
+      ["<>", "()", '""', "''", "[]", "input()", "print()"].indexOf(command) !==
+      -1
+    ) {
       sourceEditorRef.setPosition({
         column: position.column - 1,
-        lineNumber: position.lineNumber
+        lineNumber: position.lineNumber,
       })
     }
     if (['scanf("");', 'printf("");'].indexOf(command) !== -1) {
       sourceEditorRef.setPosition({
         column: position.column - 3,
-        lineNumber: position.lineNumber
+        lineNumber: position.lineNumber,
       })
     }
     sourceEditorRef.focus()

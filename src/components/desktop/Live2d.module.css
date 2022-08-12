@@ -1,43 +1,43 @@
 .staticImage {
-    position: fixed;
-    bottom: 0;
-    pointer-events: none;
+  position: fixed;
+  bottom: 0;
+  pointer-events: none;
 }
 
 .image0 {
-    right: 14px;
-    bottom: -6px;
+  right: 14px;
+  bottom: -6px;
 }
 
 .image1 {
-    right: 3px;
+  right: 3px;
 }
 
 .image2 {
-    right: 6px;
+  right: 6px;
 }
 
 .live2dCanvasContainer {
-    user-select: none;
-    pointer-events: none;
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    z-index: 100;
-    font-size: 0;
-    opacity: 0.5;
+  user-select: none;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  font-size: 0;
+  opacity: 0.5;
 }
 
 .live2d {
-    position: relative;
+  position: relative;
 }
 
 .wanko {
-    right: -60px;
-    bottom: -70px;
+  right: -60px;
+  bottom: -70px;
 }
 
 .cat {
-    right: -80px;
-    bottom: -10px;
+  right: -80px;
+  bottom: -10px;
 }

@@ -1,15 +1,22 @@
-import React from 'react'
-import { useSnapshot } from 'valtio'
-import Editor from '@monaco-editor/react'
-import { Allotment } from 'allotment'
-import { Spin } from 'antd'
-import { language } from '../../assets/templates'
-import styles from './Content.module.css'
-import { state, sourceEditorDidMount, stdinEditorDidMount, onSource, onStdin } from '../../store'
-import { monacoConfig } from '../../utils'
+import React from "react"
+import { useSnapshot } from "valtio"
+import Editor from "@monaco-editor/react"
+import { Allotment } from "allotment"
+import { Spin } from "antd"
+import { language } from "../../assets/templates"
+import styles from "./Content.module.css"
+import {
+  state,
+  sourceEditorDidMount,
+  stdinEditorDidMount,
+  onSource,
+  onStdin,
+} from "../../store"
+import { monacoConfig } from "../../utils"
 
 function Content() {
-  const { languageID, theme, fontSize, sourceValue, stdinValue, stdoutValue } = useSnapshot(state)
+  const { languageID, theme, fontSize, sourceValue, stdinValue, stdoutValue } =
+    useSnapshot(state)
 
   return (
     <div className={styles.content}>
@@ -22,7 +29,12 @@ function Content() {
             onChange={onSource}
             loading={<Spin />}
             theme={theme}
-            options={{ ...monacoConfig, fontSize, lineNumbers: true, scrollBeyondLastLine: true }}
+            options={{
+              ...monacoConfig,
+              fontSize,
+              lineNumbers: true,
+              scrollBeyondLastLine: true,
+            }}
           />
         </Allotment.Pane>
         <Allotment.Pane>
@@ -50,7 +62,7 @@ function Content() {
           </Allotment>
         </Allotment.Pane>
       </Allotment>
-    </div >
+    </div>
   )
 }
 

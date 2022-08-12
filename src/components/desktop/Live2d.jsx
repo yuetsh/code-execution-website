@@ -1,35 +1,35 @@
-import React, { useEffect } from 'react'
-import { useSnapshot } from 'valtio'
-import clsx from 'clsx'
-import images from '../../assets/images'
-import { state } from '../../store'
-import styles from './Live2d.module.css'
+import React, { useEffect } from "react"
+import { useSnapshot } from "valtio"
+import clsx from "clsx"
+import images from "../../assets/images"
+import { state } from "../../store"
+import styles from "./Live2d.module.css"
 
 function Live2d() {
   const { live2dID } = useSnapshot(state)
   const id = parseInt(live2dID)
-  
+
   useEffect(() => {
-    let model = '/live2d/models/'
+    let model = "/live2d/models/"
     if (id > 2 && window.loadlive2d) {
       switch (id) {
         case 3:
-          model += '33'
+          model += "33"
           break
         case 4:
-          model += 'wanko' // 需要调整位置
+          model += "wanko" // 需要调整位置
           break
         case 5:
-          model += 'whitecat' // 需要调整位置
+          model += "whitecat" // 需要调整位置
           break
         case 6:
-          model += 'blackcat' // 需要调整位置
+          model += "blackcat" // 需要调整位置
           break
         default:
           break
       }
-      model += '/model.json'
-      window.loadlive2d('live2d', model)
+      model += "/model.json"
+      window.loadlive2d("live2d", model)
     }
   }, [live2dID])
 
@@ -40,14 +40,23 @@ function Live2d() {
   })
   const canvasStyles = clsx(styles.live2d, {
     [styles.wanko]: id === 4,
-    [styles.cat]: id === 5 || id === 6
+    [styles.cat]: id === 5 || id === 6,
   })
   return (
     <React.Fragment>
-      {id < 3 && id !== -1 && <img className={imageStyles} src={images[id]} alt="kanban" />}
-      {id >= 3 && <div className={styles.live2dCanvasContainer}>
-        <canvas id="live2d" width="400" height="400" className={canvasStyles} />
-      </div>}
+      {id < 3 && id !== -1 && (
+        <img className={imageStyles} src={images[id]} alt="kanban" />
+      )}
+      {id >= 3 && (
+        <div className={styles.live2dCanvasContainer}>
+          <canvas
+            id="live2d"
+            width="400"
+            height="400"
+            className={canvasStyles}
+          />
+        </div>
+      )}
     </React.Fragment>
   )
 }

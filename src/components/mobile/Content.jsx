@@ -1,15 +1,22 @@
-import React from 'react'
-import { useSnapshot } from 'valtio'
-import { Spin } from 'antd'
-import Editor from '@monaco-editor/react'
-import styles from './Content.module.css'
-import Helper from './Helper'
-import { state, sourceEditorDidMount, stdinEditorDidMount, onSource, onStdin } from '../../store'
-import { language } from '../../assets/templates'
-import { monacoConfig } from '../../utils'
+import React from "react"
+import { useSnapshot } from "valtio"
+import { Spin } from "antd"
+import Editor from "@monaco-editor/react"
+import styles from "./Content.module.css"
+import Helper from "./Helper"
+import {
+  state,
+  sourceEditorDidMount,
+  stdinEditorDidMount,
+  onSource,
+  onStdin,
+} from "../../store"
+import { language } from "../../assets/templates"
+import { monacoConfig } from "../../utils"
 
 function Content() {
-  const { languageID, theme, fontSize, sourceValue, stdinValue, stdoutValue } = useSnapshot(state)
+  const { languageID, theme, fontSize, sourceValue, stdinValue, stdoutValue } =
+    useSnapshot(state)
 
   return (
     <div className={styles.content}>
@@ -21,7 +28,12 @@ function Content() {
           onChange={onSource}
           loading={<Spin />}
           theme={theme}
-          options={{ ...monacoConfig, fontSize, lineNumbers: false, scrollBeyondLastColumn: false }}
+          options={{
+            ...monacoConfig,
+            fontSize,
+            lineNumbers: false,
+            scrollBeyondLastColumn: false,
+          }}
         />
         <Helper />
       </div>
@@ -45,7 +57,6 @@ function Content() {
           options={{ ...monacoConfig, fontSize, readOnly: true }}
         />
       </div>
-
     </div>
   )
 }
