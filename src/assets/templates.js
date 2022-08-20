@@ -42,7 +42,7 @@ export const deadResults = {
     },
   },
   62: {
-    sourceBase64:
+    encoded:
       "cHVibGljIGNsYXNzIE1haW4gew0KICAgIHB1YmxpYyBzdGF0aWMgdm9pZCBtYWluKFN0cmluZ1tdIGFyZ3MpIHsNCiAgICAgICAgU3lzdGVtLm91dC5wcmludGxuKCLpu4TlsqnkuIDogYwiKTsNCiAgICB9DQp9",
     result: {
       output: "黄岩一职",
