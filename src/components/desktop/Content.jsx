@@ -1,8 +1,8 @@
 import React from "react"
+import { Loader } from "@mantine/core"
 import { useSnapshot } from "valtio"
 import Editor from "@monaco-editor/react"
 import { Allotment } from "allotment"
-import { Spin } from "antd"
 import { language } from "../../assets/templates"
 import styles from "./Content.module.css"
 import {
@@ -27,8 +27,8 @@ function Content() {
             language={language[languageID]}
             onMount={sourceEditorDidMount}
             onChange={onSource}
-            loading={<Spin />}
             theme={theme}
+            loading={<Loader />}
             options={{
               ...monacoConfig,
               fontSize,
@@ -45,8 +45,8 @@ function Content() {
                 defaultLanguage="plaintext"
                 onMount={stdinEditorDidMount}
                 onChange={onStdin}
-                loading={<Spin />}
                 theme={theme}
+                loading={<Loader />}
                 options={{ ...monacoConfig, fontSize }}
               />
             </Allotment.Pane>
@@ -54,8 +54,8 @@ function Content() {
               <Editor
                 value={stdoutValue}
                 defaultLanguage="plaintext"
-                loading={<Spin />}
                 theme={theme}
+                loading={<Loader />}
                 options={{ ...monacoConfig, fontSize, readOnly: true }}
               />
             </Allotment.Pane>

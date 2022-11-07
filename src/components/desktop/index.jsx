@@ -1,17 +1,15 @@
 import React, { useEffect } from "react"
+import { AppShell } from "@mantine/core"
 import { useSnapshot } from "valtio"
 import { useMonaco } from "@monaco-editor/react"
-import { message } from "antd"
 import { state, onTheme, run } from "../../store"
 import Header from "./Header"
 import Content from "./Content"
 import Live2d from "./Live2d"
 import "allotment/dist/style.css"
 
-message.config({ maxCount: 1 })
-
 function Desktop() {
-  const { theme, header } = useSnapshot(state)
+  const { theme } = useSnapshot(state)
   const monaco = useMonaco()
 
   useEffect(() => {
@@ -40,11 +38,10 @@ function Desktop() {
   }, [monaco])
 
   return (
-    <div style={{ backgroundColor: header.primary }}>
-      <Header />
+    <AppShell header={<Header />} padding="0">
       <Content />
       <Live2d />
-    </div>
+    </AppShell>
   )
 }
 

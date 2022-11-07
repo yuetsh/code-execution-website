@@ -30,7 +30,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.KEY }}
           REMOTE_HOST: ${{ secrets.HOST }}
           ARGS: "-avzr --delete"
-          SOURCE: build/
+          SOURCE: dist/
           REMOTE_USER: root
           TARGET: /root/Judge0/ide
 

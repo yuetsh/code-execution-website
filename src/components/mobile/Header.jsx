@@ -1,6 +1,16 @@
 import React from "react"
-import { Button, PageHeader, Modal, Radio, Row, Space } from "antd"
-import { CaretRightOutlined } from "@ant-design/icons"
+import {
+  SegmentedControl,
+  Paper,
+  Space,
+  Flex,
+  Button,
+  Modal,
+  CopyButton,
+  Title,
+  Header as MantineHeader,
+} from "@mantine/core"
+import CaretRightIcon from "../shared/CaretRightIcon"
 import { useSnapshot } from "valtio"
 import {
   state,
@@ -9,91 +19,103 @@ import {
   onRestore,
   toggleSettings,
   onLanguage,
-  copy,
 } from "../../store"
 import { useMonaco } from "@monaco-editor/react"
 
 function Header() {
-  const { header, runBtnLoading, theme, showSettings, languageID } =
-    useSnapshot(state)
+  const {
+    header,
+    runBtnLoading,
+    theme,
+    showSettings,
+    languageID,
+    sourceValue,
+  } = useSnapshot(state)
   const monaco = useMonaco()
 
   return (
-    <React.Fragment>
-      <PageHeader
-        title={
-          <span style={{ color: header.type === "dark" ? "white" : "black" }}>
-            徐越的自测猫
-          </span>
-        }
-        extra={[
-          <Button disabled={!monaco} key="settings" onClick={toggleSettings}>
-            设置
-          </Button>,
-          <Button
-            disabled={!monaco}
-            key="run"
-            type="primary"
-            onClick={run}
-            loading={runBtnLoading}
-            icon={<CaretRightOutlined />}
+    <>
+      <MantineHeader
+        height={60}
+        p="0 16px"
+        withBorder={false}
+        style={{ backgroundColor: header.primary }}
+      >
+        <Flex justify="space-between" align="center">
+          <Title
+            order={4}
+            style={{ color: header.type === "dark" ? "white" : "black" }}
           >
-            运行
-          </Button>,
-        ]}
-      />
-      <Modal visible={showSettings} onCancel={toggleSettings} footer={null}>
-        <Space direction="vertical">
-          <Row align="middle">
+            徐越的自测猫
+          </Title>
+          <Flex gap="xs" mih={60} align="center">
+            <Button
+              variant="default"
+              style={{ fontWeight: 400 }}
+              disabled={!monaco}
+              onClick={toggleSettings}
+            >
+              设置
+            </Button>
+            <Button
+              disabled={!monaco}
+              variant="gradient"
+              gradient={{ from: "indigo", to: "cyan" }}
+              onClick={run}
+              loading={runBtnLoading}
+              leftIcon={<CaretRightIcon />}
+            >
+              运行
+            </Button>
+          </Flex>
+        </Flex>
+      </MantineHeader>
+      <Modal opened={showSettings} onClose={toggleSettings} title="设置">
+        <Paper>
+          <Flex align="center">
             <span>语言：</span>
-            <Radio.Group
-              size="large"
+            <SegmentedControl
               value={languageID}
-              buttonStyle="solid"
-              onChange={(e) => onLanguage(e.target.value)}
-            >
-              <Radio.Button
-                value="50"
-                style={{ width: 44, textAlign: "center" }}
-              >
-                C
-              </Radio.Button>
-              <Radio.Button
-                value="54"
-                style={{ width: 44, textAlign: "center" }}
-              >
-                C++
-              </Radio.Button>
-              <Radio.Button value="71">Python</Radio.Button>
-              <Radio.Button value="62">Java</Radio.Button>
-            </Radio.Group>
-          </Row>
-          <Row align="middle">
+              onChange={onLanguage}
+              data={[
+                { label: "C", value: "50" },
+                { label: "C++", value: "54" },
+                { label: "Python", value: "71" },
+                { label: "Java", value: "62" },
+              ]}
+            />
+          </Flex>
+          <Space h="md" />
+          <Flex align="center">
             <span>主题：</span>
-            <Radio.Group
-              size="large"
+            <SegmentedControl
               value={theme}
-              buttonStyle="solid"
-              onChange={(e) => onTheme(monaco, e.target.value)}
-            >
-              <Radio.Button value="vs-light">浅色</Radio.Button>
-              <Radio.Button value="dracula">暗色</Radio.Button>
-            </Radio.Group>
-          </Row>
-          <Row align="middle">
+              onChange={(val) => onTheme(monaco, val)}
+              data={[
+                { label: "浅色", value: "vs-light" },
+                { label: "暗色", value: "dracula" },
+              ]}
+            />
+          </Flex>
+          <Space h="md" />
+          <Flex align="center">
             <span>代码：</span>
-            <Space>
-              <Button size="large" onClick={onRestore}>
+            <Flex gap="xs">
+              <Button size="md" onClick={onRestore}>
                 重置
               </Button>
-              <Button size="large" onClick={copy}>
-                复制
-              </Button>
-            </Space>
-          </Row>
-        </Space>
+              <CopyButton value={sourceValue}>
+                {({ copied, copy }) => (
+                  <Button size="md" onClick={copy}>
+                    {copied ? "成功" : "复制"}
+                  </Button>
+                )}
+              </CopyButton>
+            </Flex>
+          </Flex>
+        </Paper>
       </Modal>
-    </React.Fragment>
+    </>
   )
 }
 

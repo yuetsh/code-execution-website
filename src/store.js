@@ -1,6 +1,4 @@
 import { proxy } from "valtio"
-import { message } from "antd"
-import copyText from "copy-text-to-clipboard"
 import { createSubmission, getOJProblem } from "./api"
 import { language, sources } from "./assets/templates"
 import themeList from "./assets/themelist.json"
@@ -22,7 +20,7 @@ export const state = proxy({
   stdinValue: "输入信息",
   stdoutValue: "输出信息",
   theme: defaultTheme,
-  fontSize: 12,
+  fontSize: 24,
   languageID: localStorage.getItem("language_id") || "50",
   runBtnLoading: false,
   header: {
@@ -58,6 +56,10 @@ export function onFontSize(value) {
 
 export async function onTheme(monaco, value) {
   state.theme = value
+  state.header = {
+    primary: themeList[value].primary,
+    type: themeList[value].type,
+  }
   if (["vs-dark", "vs-light"].indexOf(value) !== -1) {
     monaco.editor.setTheme(value)
   } else {
@@ -74,10 +76,6 @@ export async function onTheme(monaco, value) {
     }
   }
   localStorage.setItem("theme", value)
-  state.header = {
-    primary: themeList[value].primary,
-    type: themeList[value].type,
-  }
 }
 
 export function onRestore() {
@@ -127,11 +125,6 @@ export function onLive2d() {
       : String(parseInt(state.live2dID) + 1)
   state.live2dID = idString
   localStorage.setItem("live2d_id", idString)
-}
-
-export function copy() {
-  copyText(state.sourceValue)
-  message.success("代码复制成功")
 }
 
 export function toggleSettings() {

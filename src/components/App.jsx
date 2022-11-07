@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import { useSnapshot } from "valtio"
 import Desktop from "./desktop"
 import Mobile from "./mobile"
 import { useWindowWidth } from "../utils"
@@ -6,16 +7,23 @@ import { state } from "../store"
 
 function App() {
   const width = useWindowWidth()
-  state.fontSize = width > 800 ? localStorage.getItem("fontsize") || 24 : 16
+
+  const { header } = useSnapshot(state)
+
+  const defaultValue = width > 800 ? localStorage.getItem("fontsize") || 24 : 16
+  state.fontSize = parseInt(defaultValue, 10)
+
   useEffect(() => {
-    state.fontSize = width > 800 ? localStorage.getItem("fontsize") || 24 : 16
+    const defaultValue =
+      width > 800 ? localStorage.getItem("fontsize") || 24 : 16
+    state.fontSize = parseInt(defaultValue, 10)
   }, [width])
 
-  if (width > 800) {
-    return <Desktop />
-  } else {
-    return <Mobile />
-  }
+  return (
+    <div style={{ backgroundColor: header.primary }}>
+      {width > 800 ? <Desktop /> : <Mobile />}
+    </div>
+  )
 }
 
 export default App

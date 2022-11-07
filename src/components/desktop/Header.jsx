@@ -1,8 +1,16 @@
-import { PageHeader, Button, Select, InputNumber } from "antd"
+import {
+  Header as MantineHeader,
+  Button,
+  Select,
+  Title,
+  Flex,
+  NumberInput,
+  CopyButton,
+} from "@mantine/core"
 import { useSnapshot } from "valtio"
 import { useMonaco } from "@monaco-editor/react"
-import { CaretRightOutlined } from "@ant-design/icons"
 import themeList from "../../assets/themelist.json"
+import CaretRightIcon from "../shared/CaretRightIcon"
 import {
   state,
   onFontSize,
@@ -10,91 +18,101 @@ import {
   onRestore,
   onLanguage,
   onLive2d,
-  copy,
   run,
 } from "../../store"
 
-const { Option } = Select
-
 function Header() {
-  const { theme, fontSize, languageID, runBtnLoading, header } =
+  const { theme, fontSize, languageID, runBtnLoading, header, sourceValue } =
     useSnapshot(state)
 
   const monaco = useMonaco()
 
   return (
-    <PageHeader
-      title={
-        <span style={{ color: header.type === "dark" ? "white" : "black" }}>
+    <MantineHeader
+      height={60}
+      p="0 16px"
+      withBorder={false}
+      style={{ backgroundColor: header.primary }}
+    >
+      <Flex justify="space-between" align="center">
+        <Title
+          order={3}
+          style={{ color: header.type === "dark" ? "white" : "black" }}
+        >
           徐越的自测猫
-        </span>
-      }
-      extra={[
-        <Select
-          disabled={!monaco}
-          key="theme"
-          style={{ width: 160 }}
-          value={theme}
-          onChange={(val) => onTheme(monaco, val)}
-        >
-          {Object.keys(themeList).map((it) => (
-            <Option key={it} value={it}>
-              {"主题：" + themeList[it].file}
-            </Option>
-          ))}
-        </Select>,
-        <InputNumber
-          disabled={!monaco}
-          key="font_size"
-          min={14}
-          max={40}
-          step={2}
-          value={fontSize}
-          formatter={(num) => "字号：" + num + "px"}
-          onChange={onFontSize}
-          style={{ width: 100 }}
-        />,
-        <Button key="live2d" onClick={onLive2d}>
-          看板娘
-        </Button>,
-        <Button disabled={!monaco} key="restore" onClick={onRestore}>
-          重置
-        </Button>,
-        <Button disabled={!monaco} key="copy" onClick={copy}>
-          复制
-        </Button>,
-        <Select
-          disabled={!monaco}
-          key="language"
-          style={{ width: 110 }}
-          value={languageID}
-          onChange={onLanguage}
-        >
-          <Option key="c" value="50">
-            语言：C
-          </Option>
-          <Option key="cpp" value="54">
-            语言：C++
-          </Option>
-          <Option key="python" value="71">
-            语言：Python
-          </Option>
-          <Option key="java" value="62">
-            语言：Java
-          </Option>
-        </Select>,
-        <Button
-          disabled={!monaco}
-          key="run"
-          type="primary"
-          onClick={run}
-          loading={runBtnLoading}
-          icon={<CaretRightOutlined />}
-        >
-          运行(F5)
-        </Button>,
-      ]}
-    />
+        </Title>
+        <Flex gap="xs" mih={60} align="center">
+          <Select
+            disabled={!monaco}
+            value={theme}
+            onChange={(val) => onTheme(monaco, val)}
+            data={Object.keys(themeList).map((it) => ({
+              value: it,
+              label: `主题：${themeList[it].file}`,
+            }))}
+          ></Select>
+          <NumberInput
+            disabled={!monaco}
+            min={14}
+            max={40}
+            step={2}
+            value={fontSize}
+            formatter={(num) => `字号：${num}px`}
+            onChange={onFontSize}
+            style={{ width: 120 }}
+          />
+          <Button
+            style={{ fontWeight: 400 }}
+            disabled={!monaco}
+            variant="default"
+            onClick={onLive2d}
+          >
+            看板娘
+          </Button>
+          <Button
+            style={{ fontWeight: 400 }}
+            disabled={!monaco}
+            variant="default"
+            onClick={onRestore}
+          >
+            重置
+          </Button>
+          <CopyButton value={sourceValue}>
+            {({ copied, copy }) => (
+              <Button
+                style={{ fontWeight: 400 }}
+                disabled={!monaco}
+                variant="default"
+                onClick={copy}
+              >
+                {copied ? "成功" : "复制"}
+              </Button>
+            )}
+          </CopyButton>
+          <Select
+            value={languageID}
+            onChange={onLanguage}
+            data={[
+              { value: "50", label: "语言：C" },
+              { value: "54", label: "语言：C++" },
+              { value: "71", label: "语言：Python" },
+              { value: "62", label: "语言：Java" },
+            ]}
+            style={{ width: 140 }}
+          />
+          <Button
+            disabled={!monaco}
+            variant="gradient"
+            gradient={{ from: "indigo", to: "cyan" }}
+            leftIcon={<CaretRightIcon />}
+            onClick={run}
+            loading={runBtnLoading}
+          >
+            运行(F5)
+          </Button>
+        </Flex>
+      </Flex>
+    </MantineHeader>
   )
 }
 
