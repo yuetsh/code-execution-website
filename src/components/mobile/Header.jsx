@@ -31,56 +31,57 @@ function Header() {
         >
           徐越的自测猫
         </Title>
-        {monaco && <Group spacing="xs">
-          <Menu>
-            <Menu.Target>
-              <Button variant="default" style={{ fontWeight: 400 }}>
-                设置
-              </Button>
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Group spacing="xs" align='start'>
-                <Stack spacing={0} align="center">
-                  <Menu.Label>语言</Menu.Label>
-                  <SegmentedControl
-                    orientation="vertical"
-                    value={languageID}
-                    onChange={onLanguage}
-                    data={[
-                      { label: "C", value: "50" },
-                      { label: "C++", value: "54" },
-                      { label: "Python", value: "71" },
-                      { label: "Java", value: "62" },
-                    ]}
-                  />
-                </Stack>
-                <Stack spacing={0} align="center">
-                  <Menu.Label>主题</Menu.Label>
-                  <SegmentedControl
-                    orientation="vertical"
-                    value={theme}
-                    onChange={(val) => onTheme(monaco, val)}
-                    data={[
-                      { label: "暗色", value: "dracula" },
-                      { label: "浅色", value: "vs-light" },
-                    ]}
-                  />
-                </Stack>
-              </Group>
-            </Menu.Dropdown>
-          </Menu>
+        {monaco && (
+          <Group spacing="xs">
+            <Menu>
+              <Menu.Target>
+                <Button variant="default" style={{ fontWeight: 400 }}>
+                  设置
+                </Button>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Group spacing="xs" align="start">
+                  <Stack spacing={0} align="center">
+                    <Menu.Label>语言</Menu.Label>
+                    <SegmentedControl
+                      orientation="vertical"
+                      value={languageID}
+                      onChange={onLanguage}
+                      data={[
+                        { label: "C", value: "50" },
+                        { label: "C++", value: "54" },
+                        { label: "Python", value: "71" },
+                        { label: "Java", value: "62" },
+                      ]}
+                    />
+                  </Stack>
+                  <Stack spacing={0} align="center">
+                    <Menu.Label>主题</Menu.Label>
+                    <SegmentedControl
+                      orientation="vertical"
+                      value={theme}
+                      onChange={(val) => onTheme(monaco, val)}
+                      data={[
+                        { label: "暗色", value: "dracula" },
+                        { label: "浅色", value: "vs-light" },
+                      ]}
+                    />
+                  </Stack>
+                </Group>
+              </Menu.Dropdown>
+            </Menu>
 
-          <Button
-            variant="gradient"
-            gradient={{ from: "indigo", to: "cyan" }}
-            onClick={run}
-            loading={runBtnLoading}
-            leftIcon={<CaretRightIcon />}
-          >
-            运行
-          </Button>
-        </Group>}
-
+            <Button
+              variant="gradient"
+              gradient={{ from: "indigo", to: "cyan" }}
+              onClick={run}
+              loading={runBtnLoading}
+              leftIcon={<CaretRightIcon />}
+            >
+              运行
+            </Button>
+          </Group>
+        )}
       </Group>
     </MantineHeader>
   )

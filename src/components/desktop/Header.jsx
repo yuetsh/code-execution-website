@@ -41,72 +41,74 @@ function Header() {
         >
           徐越的自测猫
         </Title>
-        {monaco && <Group spacing="xs" >
-          <Select
-            value={theme}
-            onChange={(val) => onTheme(monaco, val)}
-            data={Object.keys(themeList).map((it) => ({
-              value: it,
-              label: `主题：${themeList[it].file}`,
-            }))}
-          ></Select>
-          <NumberInput
-            min={20}
-            max={40}
-            step={2}
-            value={fontSize}
-            formatter={(num) => `字号：${num}px`}
-            onChange={onFontSize}
-            style={{ width: 120 }}
-          />
-          <Button
-            style={{ fontWeight: 400 }}
-            variant="default"
-            onClick={onLive2d}
-          >
-            看板娘
-          </Button>
-          <Button
-            style={{ fontWeight: 400 }}
-            variant="default"
-            onClick={onRestore}
-          >
-            重置
-          </Button>
-          <CopyButton value={sourceValue}>
-            {({ copied, copy }) => (
-              <Button
-                style={{ fontWeight: 400 }}
-                variant="default"
-                onClick={copy}
-              >
-                {copied ? "成功" : "复制"}
-              </Button>
-            )}
-          </CopyButton>
-          <Select
-            value={languageID}
-            onChange={onLanguage}
-            data={[
-              { value: "50", label: "语言：C" },
-              { value: "54", label: "语言：C++" },
-              { value: "71", label: "语言：Python" },
-              { value: "62", label: "语言：Java" },
-            ]}
-            style={{ width: 140 }}
-          />
-          <Button
-            variant="gradient"
-            gradient={{ from: "indigo", to: "cyan" }}
-            leftIcon={<CaretRightIcon />}
-            onClick={run}
-            loading={runBtnLoading}
-          >
-            运行(F5)
-          </Button>
-        </Group>}
+        {monaco && (
+          <Group spacing="xs">
+            <Select
+              value={theme}
+              onChange={(val) => onTheme(monaco, val)}
+              data={Object.keys(themeList).map((it) => ({
+                value: it,
+                label: `主题：${themeList[it].file}`,
+              }))}
+            ></Select>
+            <NumberInput
+              min={20}
+              max={40}
+              step={2}
+              value={fontSize}
+              formatter={(num) => `字号：${num}px`}
+              onChange={onFontSize}
+              style={{ width: 120 }}
+            />
+            <Button
+              style={{ fontWeight: 400 }}
+              variant="default"
+              onClick={onLive2d}
+            >
+              看板娘
+            </Button>
+            <Button
+              style={{ fontWeight: 400 }}
+              variant="default"
+              onClick={onRestore}
+            >
+              重置
+            </Button>
+            <CopyButton value={sourceValue}>
+              {({ copied, copy }) => (
+                <Button
+                  style={{ fontWeight: 400 }}
+                  variant="default"
+                  onClick={copy}
+                >
+                  {copied ? "成功" : "复制"}
+                </Button>
+              )}
+            </CopyButton>
+            <Select
+              value={languageID}
+              onChange={onLanguage}
+              data={[
+                { value: "50", label: "语言：C" },
+                { value: "54", label: "语言：C++" },
+                { value: "71", label: "语言：Python" },
+                { value: "62", label: "语言：Java" },
+              ]}
+              style={{ width: 140 }}
+            />
+            <Button
+              variant="gradient"
+              gradient={{ from: "indigo", to: "cyan" }}
+              leftIcon={<CaretRightIcon />}
+              onClick={run}
+              loading={runBtnLoading}
+            >
+              运行(F5)
+            </Button>
+          </Group>
+        )}
       </Group>
-    </MantineHeader >
+    </MantineHeader>
   )
 }
 
