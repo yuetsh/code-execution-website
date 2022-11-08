@@ -6,7 +6,7 @@ import { language } from "../../assets/templates"
 
 function PythonHelper() {
   return (
-    <React.Fragment>
+    <>
       <Button size="xs" variant="subtle" onClick={onHelper("\t")}>
         Tab
       </Button>
@@ -28,13 +28,13 @@ function PythonHelper() {
       <Button size="xs" variant="subtle" onClick={onHelper("print()")}>
         输出
       </Button>
-    </React.Fragment>
+    </>
   )
 }
 
 function CHelper() {
   return (
-    <React.Fragment>
+    <>
       <Button size="xs" variant="subtle" onClick={onHelper("\t")}>
         Tab
       </Button>
@@ -92,27 +92,125 @@ function CHelper() {
       <Button size="xs" variant="subtle" onClick={onHelper('printf("");')}>
         输出
       </Button>
-    </React.Fragment>
+      <Button size="xs" variant="subtle" onClick={onHelper("\n")}>
+        换行
+      </Button>
+    </>
   )
 }
 
 function CppHelper() {
-  return <React.Fragment></React.Fragment>
+  return (
+    <>
+      <Button size="xs" variant="subtle" onClick={onHelper("\t")}>
+        Tab
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(",")}>
+        {","}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(";")}>
+        {";"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("<>")}>
+        {"< >"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("()")}>
+        {"( )"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("[]")}>
+        {"[ ]"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("{\n")}>
+        {"{ }"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper('""')}>
+        {'" "'}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("''")}>
+        {"' '"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(" = ")}>
+        {"="}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper('cout<<""<<endl;')}>
+        输入
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("cin>>;")}>
+        输出
+      </Button>
+    </>
+  )
 }
 
 function JavaHelper() {
-  return <React.Fragment></React.Fragment>
+  return (
+    <>
+      <Button size="xs" variant="subtle" onClick={onHelper("\t")}>
+        Tab
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(",")}>
+        {","}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(";")}>
+        {";"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("\\n")}>
+        {"\\n"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("<>")}>
+        {"< >"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("()")}>
+        {"( )"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("[]")}>
+        {"[ ]"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("{\n")}>
+        {"{ }"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper('""')}>
+        {'" "'}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("''")}>
+        {"' '"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(" = ")}>
+        {"="}
+      </Button>
+      <Button
+        size="xs"
+        variant="subtle"
+        onClick={onHelper('System.out.println("");')}
+      >
+        输出
+      </Button>
+    </>
+  )
 }
 
 function Helper() {
   const { languageID } = useSnapshot(state)
   let Comp = null
-  if (language[languageID] === "c") {
-    Comp = CHelper()
-  } else if (language[languageID] === "python") {
-    Comp = PythonHelper()
+  switch (language[languageID]) {
+    case "c":
+      Comp = CHelper()
+      break
+    case "python":
+      Comp = PythonHelper()
+      break
+    case "java":
+      Comp = JavaHelper()
+      break
+    default:
+      Comp = CppHelper()
+      break
   }
-  return <SimpleGrid cols={4}>{Comp}</SimpleGrid>
+  return (
+    <SimpleGrid cols={5} spacing={0}>
+      {Comp}
+    </SimpleGrid>
+  )
 }
 
 export default Helper

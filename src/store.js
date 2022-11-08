@@ -28,7 +28,6 @@ export const state = proxy({
     type: themeList[defaultTheme].type,
   },
   live2dID: localStorage.getItem("live2d_id") || "-1",
-  showSettings: false,
 })
 
 export function sourceEditorDidMount(editor) {
@@ -82,7 +81,6 @@ export function onRestore() {
   state.sourceValue = sources[state.languageID]
   localStorage.removeItem("code_" + language[state.languageID])
   state.stdoutValue = "输出信息"
-  message.success("代码重置成功")
 }
 
 export function onLanguage(value) {
@@ -125,10 +123,6 @@ export function onLive2d() {
       : String(parseInt(state.live2dID) + 1)
   state.live2dID = idString
   localStorage.setItem("live2d_id", idString)
-}
-
-export function toggleSettings() {
-  state.showSettings = !state.showSettings
 }
 
 export function onHelper(command) {

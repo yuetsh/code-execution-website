@@ -1,5 +1,13 @@
 import React from "react"
-import { Tabs, Flex, Loader } from "@mantine/core"
+import {
+  Button,
+  Menu,
+  Tabs,
+  Stack,
+  Loader,
+  CopyButton,
+  Group,
+} from "@mantine/core"
 import { useSnapshot } from "valtio"
 import Editor from "@monaco-editor/react"
 import Helper from "./Helper"
@@ -10,6 +18,7 @@ import {
   stdinEditorDidMount,
   onSource,
   onStdin,
+  onRestore,
 } from "../../store"
 import { language } from "../../assets/templates"
 import { monacoConfig } from "../../utils"
@@ -26,7 +35,7 @@ function Content() {
   } = useSnapshot(state)
 
   return (
-    <Flex direction="column" className={styles.content}>
+    <Stack className={styles.content}>
       <Editor
         value={sourceValue}
         language={language[languageID]}
@@ -41,14 +50,36 @@ function Content() {
           scrollBeyondLastColumn: false,
         }}
       />
-      <Tabs variant="outline" defaultValue="helper">
+      <Menu position="top-end" closeOnClickOutside={false}>
+        <Menu.Target>
+          <Button className={styles.floatingAction}>助手</Button>
+        </Menu.Target>
+        <Menu.Dropdown style={{ backgroundColor: header.primary }}>
+          <Group position="apart">
+            <Menu.Label>编程助手</Menu.Label>
+            <Group spacing="xs">
+              <Button
+                variant="default"
+                style={{ fontWeight: 400 }}
+                size="xs"
+                onClick={onRestore}
+              >
+                重置
+              </Button>
+              <CopyButton value={sourceValue}>
+                {({ copied, copy }) => (
+                  <Button size="xs" onClick={copy}>
+                    {copied ? "成功" : "复制"}
+                  </Button>
+                )}
+              </CopyButton>
+            </Group>
+          </Group>
+          <Helper />
+        </Menu.Dropdown>
+      </Menu>
+      <Tabs variant="outline" defaultValue="stdin">
         <Tabs.List style={{ backgroundColor: header.primary }}>
-          <Tabs.Tab
-            value="helper"
-            style={{ color: header.type === "dark" ? "white" : "black" }}
-          >
-            编程助手
-          </Tabs.Tab>
           <Tabs.Tab
             value="stdin"
             style={{ color: header.type === "dark" ? "white" : "black" }}
@@ -62,11 +93,6 @@ function Content() {
             输出信息
           </Tabs.Tab>
         </Tabs.List>
-        <Tabs.Panel value="helper">
-          <div style={{ height: 260, backgroundColor: header.primary }}>
-            <Helper />
-          </div>
-        </Tabs.Panel>
         <Tabs.Panel value="stdin">
           <Editor
             height={260}
@@ -90,7 +116,7 @@ function Content() {
           />
         </Tabs.Panel>
       </Tabs>
-    </Flex>
+    </Stack>
   )
 }
 

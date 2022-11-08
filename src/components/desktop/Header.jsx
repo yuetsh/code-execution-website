@@ -3,7 +3,7 @@ import {
   Button,
   Select,
   Title,
-  Flex,
+  Group,
   NumberInput,
   CopyButton,
 } from "@mantine/core"
@@ -34,16 +34,15 @@ function Header() {
       withBorder={false}
       style={{ backgroundColor: header.primary }}
     >
-      <Flex justify="space-between" align="center">
+      <Group position="apart" style={{ height: "100%" }}>
         <Title
           order={3}
           style={{ color: header.type === "dark" ? "white" : "black" }}
         >
           徐越的自测猫
         </Title>
-        <Flex gap="xs" mih={60} align="center">
+        {monaco && <Group spacing="xs" >
           <Select
-            disabled={!monaco}
             value={theme}
             onChange={(val) => onTheme(monaco, val)}
             data={Object.keys(themeList).map((it) => ({
@@ -52,8 +51,7 @@ function Header() {
             }))}
           ></Select>
           <NumberInput
-            disabled={!monaco}
-            min={14}
+            min={20}
             max={40}
             step={2}
             value={fontSize}
@@ -63,7 +61,6 @@ function Header() {
           />
           <Button
             style={{ fontWeight: 400 }}
-            disabled={!monaco}
             variant="default"
             onClick={onLive2d}
           >
@@ -71,7 +68,6 @@ function Header() {
           </Button>
           <Button
             style={{ fontWeight: 400 }}
-            disabled={!monaco}
             variant="default"
             onClick={onRestore}
           >
@@ -81,7 +77,6 @@ function Header() {
             {({ copied, copy }) => (
               <Button
                 style={{ fontWeight: 400 }}
-                disabled={!monaco}
                 variant="default"
                 onClick={copy}
               >
@@ -101,7 +96,6 @@ function Header() {
             style={{ width: 140 }}
           />
           <Button
-            disabled={!monaco}
             variant="gradient"
             gradient={{ from: "indigo", to: "cyan" }}
             leftIcon={<CaretRightIcon />}
@@ -110,9 +104,9 @@ function Header() {
           >
             运行(F5)
           </Button>
-        </Flex>
-      </Flex>
-    </MantineHeader>
+        </Group>}
+      </Group>
+    </MantineHeader >
   )
 }
 

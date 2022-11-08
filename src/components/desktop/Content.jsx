@@ -20,7 +20,7 @@ function Content() {
 
   return (
     <div className={styles.content}>
-      <Allotment defaultSizes={[2, 1]}>
+      <Allotment defaultSizes={[3, 2]}>
         <Allotment.Pane>
           <Editor
             value={sourceValue}
