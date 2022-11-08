@@ -2,8 +2,6 @@
   height: calc(100vh - 60px);
 }
 
-.floatingAction {
-  position: fixed;
-  top: calc(100vh - 330px);
-  right: 16px;
+.box {
+  height: 300px;
 }

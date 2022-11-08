@@ -7,6 +7,7 @@ import {
   Loader,
   CopyButton,
   Group,
+  Container,
 } from "@mantine/core"
 import { useSnapshot } from "valtio"
 import Editor from "@monaco-editor/react"
@@ -50,34 +51,6 @@ function Content() {
           scrollBeyondLastColumn: false,
         }}
       />
-      <Menu position="top-end" closeOnClickOutside={false}>
-        <Menu.Target>
-          <Button className={styles.floatingAction}>助手</Button>
-        </Menu.Target>
-        <Menu.Dropdown style={{ backgroundColor: header.primary }}>
-          <Group position="apart">
-            <Menu.Label>编程助手</Menu.Label>
-            <Group spacing="xs">
-              <Button
-                variant="default"
-                style={{ fontWeight: 400 }}
-                size="xs"
-                onClick={onRestore}
-              >
-                重置
-              </Button>
-              <CopyButton value={sourceValue}>
-                {({ copied, copy }) => (
-                  <Button size="xs" onClick={copy}>
-                    {copied ? "成功" : "复制"}
-                  </Button>
-                )}
-              </CopyButton>
-            </Group>
-          </Group>
-          <Helper />
-        </Menu.Dropdown>
-      </Menu>
       <Tabs variant="outline" defaultValue="stdin">
         <Tabs.List style={{ backgroundColor: header.primary }}>
           <Tabs.Tab
@@ -92,10 +65,43 @@ function Content() {
           >
             输出信息
           </Tabs.Tab>
+          <Menu position="top" closeOnClickOutside={false}>
+            <Menu.Target>
+              <Tabs.Tab
+                value="helper"
+                style={{ color: header.type === "dark" ? "white" : "black" }}
+              >
+                编程助手
+              </Tabs.Tab>
+            </Menu.Target>
+            <Menu.Dropdown style={{ backgroundColor: header.primary }}>
+              <Group position="apart">
+                <Menu.Label>编程助手</Menu.Label>
+                <Group spacing="xs">
+                  <Button
+                    variant="default"
+                    style={{ fontWeight: 400 }}
+                    size="xs"
+                    onClick={onRestore}
+                  >
+                    重置
+                  </Button>
+                  <CopyButton value={sourceValue}>
+                    {({ copied, copy }) => (
+                      <Button size="xs" onClick={copy}>
+                        {copied ? "成功" : "复制"}
+                      </Button>
+                    )}
+                  </CopyButton>
+                </Group>
+              </Group>
+              <Helper />
+            </Menu.Dropdown>
+          </Menu>
         </Tabs.List>
         <Tabs.Panel value="stdin">
           <Editor
-            height={260}
+            height={300}
             value={stdinValue}
             defaultLanguage="plaintext"
             onMount={stdinEditorDidMount}
@@ -107,13 +113,16 @@ function Content() {
         </Tabs.Panel>
         <Tabs.Panel value="stdout">
           <Editor
-            height={260}
+            height={300}
             value={stdoutValue}
             defaultLanguage="plaintext"
             theme={theme}
             loading={<Loader />}
             options={{ ...monacoConfig, fontSize, readOnly: true }}
           />
+        </Tabs.Panel>
+        <Tabs.Panel value="helper">
+          <div className={styles.box} />
         </Tabs.Panel>
       </Tabs>
     </Stack>
