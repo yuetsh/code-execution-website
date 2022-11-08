@@ -4,6 +4,6 @@
 
 .floatingAction {
   position: fixed;
-  bottom: 300px;
+  top: calc(100vh - 330px);
   right: 16px;
 }
