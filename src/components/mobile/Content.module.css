@@ -3,7 +3,7 @@
 }
 
 .floatingAction {
-  position: absolute;
+  position: fixed;
   bottom: 300px;
   right: 16px;
 }
