@@ -7,6 +7,7 @@ import {
   Title,
   SegmentedControl,
   Header as MantineHeader,
+  useMantineColorScheme,
 } from "@mantine/core"
 import CaretRightIcon from "../shared/CaretRightIcon"
 import { useSnapshot } from "valtio"
@@ -14,18 +15,25 @@ import { state, run, onTheme, onLanguage } from "../../store"
 import { useMonaco } from "@monaco-editor/react"
 
 function Header() {
-  const { header, runBtnLoading, theme, languageID } = useSnapshot(state)
+  const { primary, runBtnLoading, theme, languageID, accent } =
+    useSnapshot(state)
   const monaco = useMonaco()
+  const { toggleColorScheme } = useMantineColorScheme()
+
+  const changeTheme = (value) => {
+    onTheme(monaco, value)
+    toggleColorScheme()
+  }
 
   return (
     <MantineHeader
       height={60}
       p="0 16px"
       withBorder={false}
-      style={{ backgroundColor: header.primary }}
+      style={{ backgroundColor: primary }}
     >
       <Group position="apart" style={{ height: "100%" }}>
-        <Title order={4} style={{ color: header.accent }}>
+        <Title order={4} style={{ color: accent }}>
           徐越的自测猫
         </Title>
         {monaco && (
@@ -55,7 +63,7 @@ function Header() {
                     <SegmentedControl
                       orientation="vertical"
                       value={theme}
-                      onChange={(val) => onTheme(monaco, val)}
+                      onChange={changeTheme}
                       data={[
                         { label: "暗色", value: "dracula" },
                         { label: "浅色", value: "vs-light" },

@@ -1,7 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { loader } from "@monaco-editor/react"
-import { MantineProvider } from "@mantine/core"
 import App from "./components/App"
 
 loader.config({
@@ -11,18 +10,4 @@ loader.config({
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
-const customTheme = {
-  components: {
-    Button: {
-      styles: {
-        root: { fontWeight: 400 },
-      },
-    },
-  },
-}
-
-root.render(
-  <MantineProvider withGlobalStyles withNormalizeCSS theme={customTheme}>
-    <App />
-  </MantineProvider>
-)
+root.render(<App />)

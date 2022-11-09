@@ -23,11 +23,8 @@ export const state = proxy({
   fontSize: 24,
   languageID: localStorage.getItem("language_id") || "50",
   runBtnLoading: false,
-  header: {
-    primary: themeList[defaultTheme].primary,
-    accent: themeList[defaultTheme].accent,
-    type: themeList[defaultTheme].type,
-  },
+  primary: themeList[defaultTheme].primary,
+  accent: themeList[defaultTheme].accent,
   live2dID: localStorage.getItem("live2d_id") || "-1",
 })
 
@@ -56,11 +53,8 @@ export function onFontSize(value) {
 
 export async function onTheme(monaco, value) {
   state.theme = value
-  state.header = {
-    primary: themeList[value].primary,
-    accent: themeList[value].accent,
-    type: themeList[value].type,
-  }
+  state.primary = themeList[value].primary
+  state.accent = themeList[value].accent
   if (["vs-dark", "vs-light"].indexOf(value) !== -1) {
     monaco.editor.setTheme(value)
   } else {

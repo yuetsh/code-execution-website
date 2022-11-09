@@ -1,22 +1,13 @@
 import React, { useEffect } from "react"
 import { AppShell } from "@mantine/core"
-import { useSnapshot } from "valtio"
-import { useMonaco } from "@monaco-editor/react"
-import { state, onTheme, run } from "../../store"
+import "allotment/dist/style.css"
 import Header from "./Header"
 import Content from "./Content"
 import Live2d from "./Live2d"
-import "allotment/dist/style.css"
+import { run } from "../../store"
 
 function Desktop() {
-  const { theme } = useSnapshot(state)
-  const monaco = useMonaco()
-
   useEffect(() => {
-    if (monaco) {
-      onTheme(monaco, theme)
-    }
-
     window.addEventListener("keydown", (e) => {
       if (e.ctrlKey || e.metaKey) {
         switch (e.key.toLowerCase()) {
@@ -35,7 +26,7 @@ function Desktop() {
         run()
       }
     })
-  }, [monaco])
+  }, [])
 
   return (
     <AppShell header={<Header />} padding="0">

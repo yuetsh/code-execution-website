@@ -31,7 +31,8 @@ function Content() {
     sourceValue,
     stdinValue,
     stdoutValue,
-    header,
+    primary,
+    accent,
   } = useSnapshot(state)
 
   return (
@@ -51,20 +52,14 @@ function Content() {
         }}
       />
       <Tabs variant="outline" defaultValue="stdin">
-        <Tabs.List style={{ backgroundColor: header.primary }}>
-          <Tabs.Tab value="stdin" style={{ color: header.accent }}>
-            输入信息
-          </Tabs.Tab>
-          <Tabs.Tab value="stdout" style={{ color: header.accent }}>
-            输出信息
-          </Tabs.Tab>
+        <Tabs.List>
+          <Tabs.Tab value="stdin">输入信息</Tabs.Tab>
+          <Tabs.Tab value="stdout">输出信息</Tabs.Tab>
           <Menu position="top" closeOnClickOutside={false}>
             <Menu.Target>
-              <Tabs.Tab value="helper" style={{ color: header.accent }}>
-                编程助手
-              </Tabs.Tab>
+              <Tabs.Tab value="helper">编程助手</Tabs.Tab>
             </Menu.Target>
-            <Menu.Dropdown style={{ backgroundColor: header.primary }}>
+            <Menu.Dropdown>
               <Group position="apart">
                 <Menu.Label>编程助手</Menu.Label>
                 <Group spacing="xs">
