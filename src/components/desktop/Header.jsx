@@ -35,10 +35,7 @@ function Header() {
       style={{ backgroundColor: header.primary }}
     >
       <Group position="apart" style={{ height: "100%" }}>
-        <Title
-          order={3}
-          style={{ color: header.accent }}
-        >
+        <Title order={3} style={{ color: header.accent }}>
           徐越的自测猫
         </Title>
         {monaco && (
@@ -50,7 +47,7 @@ function Header() {
                 value: it,
                 label: `主题：${themeList[it].file}`,
               }))}
-            ></Select>
+            />
             <NumberInput
               min={20}
               max={40}
@@ -60,24 +57,15 @@ function Header() {
               onChange={onFontSize}
               style={{ width: 120 }}
             />
-            <Button
-              variant="default"
-              onClick={onLive2d}
-            >
+            <Button variant="default" onClick={onLive2d}>
               看板娘
             </Button>
-            <Button
-              variant="default"
-              onClick={onRestore}
-            >
+            <Button variant="default" onClick={onRestore}>
               重置
             </Button>
             <CopyButton value={sourceValue}>
               {({ copied, copy }) => (
-                <Button
-                  variant="default"
-                  onClick={copy}
-                >
+                <Button variant="default" onClick={copy}>
                   {copied ? "成功" : "复制"}
                 </Button>
               )}

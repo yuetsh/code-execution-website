@@ -15,14 +15,14 @@ const customTheme = {
   components: {
     Button: {
       styles: {
-        root: { fontWeight: 400 }
-      }
-    }
-  }
+        root: { fontWeight: 400 },
+      },
+    },
+  },
 }
 
 root.render(
-  <MantineProvider withGlobalStyles withNormalizeCSS theme={customTheme} >
+  <MantineProvider withGlobalStyles withNormalizeCSS theme={customTheme}>
     <App />
   </MantineProvider>
 )

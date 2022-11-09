@@ -32,9 +32,7 @@ function Header() {
           <Group spacing="xs">
             <Menu>
               <Menu.Target>
-                <Button variant="default">
-                  设置
-                </Button>
+                <Button variant="default">设置</Button>
               </Menu.Target>
               <Menu.Dropdown>
                 <Group spacing="xs" align="start">
