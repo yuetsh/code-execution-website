@@ -7,7 +7,6 @@ import {
   Loader,
   CopyButton,
   Group,
-  Container,
 } from "@mantine/core"
 import { useSnapshot } from "valtio"
 import Editor from "@monaco-editor/react"

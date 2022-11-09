@@ -11,7 +11,6 @@
     "query-string": "7.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-draggable": "^4.4.5",
     "valtio": "^1.7.5"
   },
   "devDependencies": {
@@ -21,7 +20,8 @@
     "@vitejs/plugin-react": "^2.2.0",
     "prettier": "^2.7.1",
     "terser": "^5.15.1",
-    "vite": "^3.2.2"
+    "vite": "^3.2.2",
+    "vite-plugin-pwa": "^0.13.3"
   },
   "scripts": {
     "start": "vite",
