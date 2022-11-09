@@ -25,17 +25,14 @@ function Header() {
       style={{ backgroundColor: header.primary }}
     >
       <Group position="apart" style={{ height: "100%" }}>
-        <Title
-          order={4}
-          style={{ color: header.type === "dark" ? "white" : "black" }}
-        >
+        <Title order={4} style={{ color: header.accent }}>
           徐越的自测猫
         </Title>
         {monaco && (
           <Group spacing="xs">
             <Menu>
               <Menu.Target>
-                <Button variant="default" style={{ fontWeight: 400 }}>
+                <Button variant="default">
                   设置
                 </Button>
               </Menu.Target>

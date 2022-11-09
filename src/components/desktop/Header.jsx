@@ -37,7 +37,7 @@ function Header() {
       <Group position="apart" style={{ height: "100%" }}>
         <Title
           order={3}
-          style={{ color: header.type === "dark" ? "white" : "black" }}
+          style={{ color: header.accent }}
         >
           徐越的自测猫
         </Title>
@@ -61,14 +61,12 @@ function Header() {
               style={{ width: 120 }}
             />
             <Button
-              style={{ fontWeight: 400 }}
               variant="default"
               onClick={onLive2d}
             >
               看板娘
             </Button>
             <Button
-              style={{ fontWeight: 400 }}
               variant="default"
               onClick={onRestore}
             >
@@ -77,7 +75,6 @@ function Header() {
             <CopyButton value={sourceValue}>
               {({ copied, copy }) => (
                 <Button
-                  style={{ fontWeight: 400 }}
                   variant="default"
                   onClick={copy}
                 >

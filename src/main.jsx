@@ -11,8 +11,18 @@ loader.config({
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
+const customTheme = {
+  components: {
+    Button: {
+      styles: {
+        root: { fontWeight: 400 }
+      }
+    }
+  }
+}
+
 root.render(
-  <MantineProvider withGlobalStyles withNormalizeCSS>
+  <MantineProvider withGlobalStyles withNormalizeCSS theme={customTheme} >
     <App />
   </MantineProvider>
 )

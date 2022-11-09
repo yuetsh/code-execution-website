@@ -25,6 +25,7 @@ export const state = proxy({
   runBtnLoading: false,
   header: {
     primary: themeList[defaultTheme].primary,
+    accent: themeList[defaultTheme].accent,
     type: themeList[defaultTheme].type,
   },
   live2dID: localStorage.getItem("live2d_id") || "-1",
@@ -57,6 +58,7 @@ export async function onTheme(monaco, value) {
   state.theme = value
   state.header = {
     primary: themeList[value].primary,
+    accent: themeList[value].accent,
     type: themeList[value].type,
   }
   if (["vs-dark", "vs-light"].indexOf(value) !== -1) {

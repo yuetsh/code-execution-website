@@ -54,13 +54,13 @@ function Content() {
         <Tabs.List style={{ backgroundColor: header.primary }}>
           <Tabs.Tab
             value="stdin"
-            style={{ color: header.type === "dark" ? "white" : "black" }}
+            style={{ color: header.accent }}
           >
             输入信息
           </Tabs.Tab>
           <Tabs.Tab
             value="stdout"
-            style={{ color: header.type === "dark" ? "white" : "black" }}
+            style={{ color: header.accent }}
           >
             输出信息
           </Tabs.Tab>
@@ -68,7 +68,7 @@ function Content() {
             <Menu.Target>
               <Tabs.Tab
                 value="helper"
-                style={{ color: header.type === "dark" ? "white" : "black" }}
+                style={{ color: header.accent }}
               >
                 编程助手
               </Tabs.Tab>
@@ -79,7 +79,6 @@ function Content() {
                 <Group spacing="xs">
                   <Button
                     variant="default"
-                    style={{ fontWeight: 400 }}
                     size="xs"
                     onClick={onRestore}
                   >

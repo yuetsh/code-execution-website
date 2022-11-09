@@ -2,71 +2,85 @@
   "vs-dark": {
     "file": "VS Dark",
     "primary": "#1e1e1e",
+    "accent": "#fff",
     "type": "dark"
   },
   "vs-light": {
     "file": "VS Light",
     "primary": "#fff",
+    "accent": "#000",
     "type": "light"
   },
   "cobalt2": {
     "file": "Cobalt2",
     "primary": "#193549",
+    "accent": "#fff",
     "type": "dark"
   },
   "dracula": {
     "file": "Dracula",
     "primary": "#282a36",
+    "accent": "#fff",
     "type": "dark"
   },
   "github": {
     "file": "GitHub",
     "primary": "#f8f8ff",
+    "accent": "#000",
     "type": "light"
   },
   "monokai": {
     "file": "Monokai",
     "primary": "#272822",
+    "accent": "#fff",
     "type": "dark"
   },
   "monoindustrial": {
     "file": "Mono Industrial",
     "primary": "#222C28",
+    "accent": "#fff",
     "type": "dark"
   },
   "pastels-on-dark": {
     "file": "Pastels on Dark",
     "primary": "#211E1E",
+    "accent": "#fff",
     "type": "dark"
   },
   "night-owl": {
     "file": "Night Owl",
     "primary": "#011627",
+    "accent": "#fff",
     "type": "dark"
   },
   "oceanic-next": {
     "file": "Oceanic Next",
     "primary": "#1B2B34",
+    "accent": "#fff",
     "type": "dark"
   },
   "solarized-light": {
     "file": "Solarized Light",
     "primary": "#FDF6E3",
+    "accent": "#000",
     "type": "light"
   },
   "solarized-dark": {
     "file": "Solarized Dark",
     "primary": "#002B36",
+    "accent": "#fff",
     "type": "dark"
   },
   "tomorrow": {
     "file": "Tomorrow",
     "primary": "#FFFFFF",
+    "accent": "#000",
     "type": "light"
   },
   "tomorrow-night": {
     "file": "Tomorrow Night",
     "primary": "#1D1F21",
+    "accent": "#fff",
     "type": "dark"
   }
 }
