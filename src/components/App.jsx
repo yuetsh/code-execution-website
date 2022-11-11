@@ -13,7 +13,7 @@ function App() {
   const width = useWindowWidth()
   const { primary, theme } = useSnapshot(state)
 
-  const defaultValue = width > 800 ? localStorage.getItem("fontsize") || 24 : 16
+  const defaultValue = width > 960 ? localStorage.getItem("fontsize") || 24 : 16
   state.fontSize = parseInt(defaultValue, 10)
 
   const [colorScheme, setColorScheme] = useState(themeList[theme].type)
@@ -40,7 +40,7 @@ function App() {
 
   useEffect(() => {
     const defaultValue =
-      width > 800 ? localStorage.getItem("fontsize") || 24 : 16
+      width > 960 ? localStorage.getItem("fontsize") || 24 : 16
     state.fontSize = parseInt(defaultValue, 10)
   }, [width])
 
@@ -51,7 +51,7 @@ function App() {
     >
       <MantineProvider withGlobalStyles withNormalizeCSS theme={customTheme}>
         <div style={{ backgroundColor: primary }}>
-          {width > 800 ? <Desktop /> : <Mobile />}
+          {width > 960 ? <Desktop /> : <Mobile />}
         </div>
       </MantineProvider>
     </ColorSchemeProvider>
