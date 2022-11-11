@@ -1,13 +1,5 @@
 import React from "react"
-import {
-  Button,
-  Menu,
-  Tabs,
-  Stack,
-  Loader,
-  CopyButton,
-  Group,
-} from "@mantine/core"
+import { Menu, Tabs, Stack, Loader } from "@mantine/core"
 import { useSnapshot } from "valtio"
 import Editor from "@monaco-editor/react"
 import Helper from "./Helper"
@@ -18,22 +10,13 @@ import {
   stdinEditorDidMount,
   onSource,
   onStdin,
-  onRestore,
 } from "../../store"
 import { language } from "../../assets/templates"
 import { monacoConfig } from "../../utils"
 
 function Content() {
-  const {
-    languageID,
-    theme,
-    fontSize,
-    sourceValue,
-    stdinValue,
-    stdoutValue,
-    primary,
-    accent,
-  } = useSnapshot(state)
+  const { languageID, theme, fontSize, sourceValue, stdinValue, stdoutValue } =
+    useSnapshot(state)
 
   return (
     <Stack className={styles.content}>
@@ -60,21 +43,6 @@ function Content() {
               <Tabs.Tab value="helper">编程助手</Tabs.Tab>
             </Menu.Target>
             <Menu.Dropdown>
-              <Group position="apart">
-                <Menu.Label>编程助手</Menu.Label>
-                <Group spacing="xs">
-                  <Button variant="default" size="xs" onClick={onRestore}>
-                    重置
-                  </Button>
-                  <CopyButton value={sourceValue}>
-                    {({ copied, copy }) => (
-                      <Button size="xs" onClick={copy}>
-                        {copied ? "成功" : "复制"}
-                      </Button>
-                    )}
-                  </CopyButton>
-                </Group>
-              </Group>
               <Helper />
             </Menu.Dropdown>
           </Menu>
