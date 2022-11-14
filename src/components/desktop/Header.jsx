@@ -71,7 +71,7 @@ function Header() {
               重置
             </Button>
             <Button variant="default" onClick={copy}>
-              "复制"
+              复制
             </Button>
             <Select
               value={languageID}
