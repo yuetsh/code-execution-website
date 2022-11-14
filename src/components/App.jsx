@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react"
 import { useSnapshot } from "valtio"
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core"
+import { useViewportSize } from '@mantine/hooks'
 import { useMonaco } from "@monaco-editor/react"
 import Desktop from "./desktop"
 import Mobile from "./mobile"
-import { useWindowWidth } from "../utils"
 import { state, onTheme } from "../store"
 import themeList from "../assets/themelist.json"
 
 function App() {
-  const ENDPOINT = 1050
+  const BREAKPOINT = 1050
   const monaco = useMonaco()
-  const width = useWindowWidth()
+  const { width } = useViewportSize()
   const { primary, theme } = useSnapshot(state)
 
-  const defaultValue = width > ENDPOINT ? localStorage.getItem("fontsize") || 24 : 16
+  const defaultValue = width > BREAKPOINT ? localStorage.getItem("fontsize") || 24 : 16
   state.fontSize = parseInt(defaultValue, 10)
 
   const [colorScheme, setColorScheme] = useState(themeList[theme].type)
@@ -41,7 +41,7 @@ function App() {
 
   useEffect(() => {
     const defaultValue =
-      width > ENDPOINT ? localStorage.getItem("fontsize") || 24 : 16
+      width > BREAKPOINT ? localStorage.getItem("fontsize") || 24 : 16
     state.fontSize = parseInt(defaultValue, 10)
   }, [width])
 
@@ -52,7 +52,7 @@ function App() {
     >
       <MantineProvider withGlobalStyles withNormalizeCSS theme={customTheme}>
         <div style={{ backgroundColor: primary }}>
-          {width > ENDPOINT ? <Desktop /> : <Mobile />}
+          {width > BREAKPOINT ? <Desktop /> : <Mobile />}
         </div>
       </MantineProvider>
     </ColorSchemeProvider>
