@@ -1,5 +1,5 @@
 import React from "react"
-import { Menu, Tabs, Stack, Loader } from "@mantine/core"
+import { Menu, Tabs, Stack, Loader, Group, Button } from "@mantine/core"
 import { useSnapshot } from "valtio"
 import Editor from "@monaco-editor/react"
 import Helper from "./Helper"
@@ -10,6 +10,8 @@ import {
   stdinEditorDidMount,
   onSource,
   onStdin,
+  onRestore,
+  copy,
 } from "../../store"
 import { language } from "../../assets/templates"
 import { monacoConfig } from "../../utils"
@@ -43,6 +45,15 @@ function Content() {
               <Tabs.Tab value="helper">编程助手</Tabs.Tab>
             </Menu.Target>
             <Menu.Dropdown>
+              <Group position="apart">
+                <Menu.Label>编程助手</Menu.Label>
+                <Group spacing="xs">
+                  <Button variant="default" size="xs" onClick={onRestore}>
+                    重置
+                  </Button>
+                  <Button size="xs" onClick={copy}>复制</Button>
+                </Group>
+              </Group>
               <Helper />
             </Menu.Dropdown>
           </Menu>

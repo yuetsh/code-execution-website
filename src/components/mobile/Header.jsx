@@ -11,7 +11,7 @@ import {
 } from "@mantine/core"
 import CaretRightIcon from "../shared/CaretRightIcon"
 import { useSnapshot } from "valtio"
-import { state, run, onTheme, onLanguage, onRestore, copy } from "../../store"
+import { state, run, onTheme, onLanguage } from "../../store"
 import { useMonaco } from "@monaco-editor/react"
 
 function Header() {
@@ -70,21 +70,9 @@ function Header() {
                       ]}
                     />
                   </Stack>
-                  <Stack spacing={0} align="center">
-                    <Menu.Label>代码</Menu.Label>
-                    <Stack spacing="xs">
-                      <Button variant="default" size="xs" onClick={onRestore}>
-                        重置
-                      </Button>
-                      <Button variant="default" size="xs" onClick={copy}>
-                        复制
-                      </Button>
-                    </Stack>
-                  </Stack>
                 </Group>
               </Menu.Dropdown>
             </Menu>
-
             <Button
               variant="gradient"
               gradient={{ from: "indigo", to: "cyan" }}

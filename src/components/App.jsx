@@ -9,11 +9,12 @@ import { state, onTheme } from "../store"
 import themeList from "../assets/themelist.json"
 
 function App() {
+  const ENDPOINT = 1050
   const monaco = useMonaco()
   const width = useWindowWidth()
   const { primary, theme } = useSnapshot(state)
 
-  const defaultValue = width > 960 ? localStorage.getItem("fontsize") || 24 : 16
+  const defaultValue = width > ENDPOINT ? localStorage.getItem("fontsize") || 24 : 16
   state.fontSize = parseInt(defaultValue, 10)
 
   const [colorScheme, setColorScheme] = useState(themeList[theme].type)
@@ -40,7 +41,7 @@ function App() {
 
   useEffect(() => {
     const defaultValue =
-      width > 960 ? localStorage.getItem("fontsize") || 24 : 16
+      width > ENDPOINT ? localStorage.getItem("fontsize") || 24 : 16
     state.fontSize = parseInt(defaultValue, 10)
   }, [width])
 
@@ -51,7 +52,7 @@ function App() {
     >
       <MantineProvider withGlobalStyles withNormalizeCSS theme={customTheme}>
         <div style={{ backgroundColor: primary }}>
-          {width > 960 ? <Desktop /> : <Mobile />}
+          {width > ENDPOINT ? <Desktop /> : <Mobile />}
         </div>
       </MantineProvider>
     </ColorSchemeProvider>
