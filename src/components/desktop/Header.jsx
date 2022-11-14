@@ -5,7 +5,6 @@ import {
   Title,
   Group,
   NumberInput,
-  CopyButton,
   useMantineColorScheme,
 } from "@mantine/core"
 import { useSnapshot } from "valtio"
@@ -20,18 +19,12 @@ import {
   onLanguage,
   onLive2d,
   run,
+  copy,
 } from "../../store"
 
 function Header() {
-  const {
-    theme,
-    fontSize,
-    languageID,
-    runBtnLoading,
-    primary,
-    accent,
-    sourceValue,
-  } = useSnapshot(state)
+  const { theme, fontSize, languageID, runBtnLoading, primary, accent } =
+    useSnapshot(state)
 
   const monaco = useMonaco()
   const { toggleColorScheme } = useMantineColorScheme()
@@ -77,13 +70,9 @@ function Header() {
             <Button variant="default" onClick={onRestore}>
               重置
             </Button>
-            <CopyButton value={sourceValue}>
-              {({ copied, copy }) => (
-                <Button variant="default" onClick={copy}>
-                  {copied ? "成功" : "复制"}
-                </Button>
-              )}
-            </CopyButton>
+            <Button variant="default" onClick={copy}>
+              "复制"
+            </Button>
             <Select
               value={languageID}
               onChange={onLanguage}

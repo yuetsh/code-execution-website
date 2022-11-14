@@ -1,4 +1,5 @@
 import { proxy } from "valtio"
+import copyFn from "copy-to-clipboard"
 import { createSubmission, getOJProblem } from "./api"
 import { language, sources } from "./assets/templates"
 import themeList from "./assets/themelist.json"
@@ -142,4 +143,8 @@ export function onHelper(command) {
     }
     sourceEditorRef.focus()
   }
+}
+
+export function copy() {
+  copyFn(state.sourceValue)
 }

@@ -8,15 +8,14 @@ import {
   SegmentedControl,
   Header as MantineHeader,
   useMantineColorScheme,
-  CopyButton,
 } from "@mantine/core"
 import CaretRightIcon from "../shared/CaretRightIcon"
 import { useSnapshot } from "valtio"
-import { state, run, onTheme, onLanguage, onRestore } from "../../store"
+import { state, run, onTheme, onLanguage, onRestore, copy } from "../../store"
 import { useMonaco } from "@monaco-editor/react"
 
 function Header() {
-  const { primary, runBtnLoading, theme, languageID, accent, sourceValue } =
+  const { primary, accent, runBtnLoading, theme, languageID } =
     useSnapshot(state)
   const monaco = useMonaco()
   const { toggleColorScheme } = useMantineColorScheme()
@@ -77,13 +76,9 @@ function Header() {
                       <Button variant="default" size="xs" onClick={onRestore}>
                         重置
                       </Button>
-                      <CopyButton value={sourceValue}>
-                        {({ copied, copy }) => (
-                          <Button variant="default" size="xs" onClick={copy}>
-                            {copied ? "成功" : "复制"}
-                          </Button>
-                        )}
-                      </CopyButton>
+                      <Button variant="default" size="xs" onClick={copy}>
+                        复制
+                      </Button>
                     </Stack>
                   </Stack>
                 </Group>
