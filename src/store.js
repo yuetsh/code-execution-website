@@ -1,5 +1,5 @@
 import { proxy } from "valtio"
-import copyFn from "copy-to-clipboard"
+import copyFn from "copy-text-to-clipboard"
 import { createSubmission, getOJProblem } from "./api"
 import { language, sources } from "./assets/templates"
 import themeList from "./assets/themelist.json"
