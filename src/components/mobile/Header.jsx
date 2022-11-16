@@ -27,20 +27,22 @@ function Header() {
 
   return (
     <MantineHeader
-      height={60}
+      height={40}
       p="0 16px"
       withBorder={false}
       style={{ backgroundColor: primary }}
     >
       <Group position="apart" style={{ height: "100%" }}>
-        <Title order={4} style={{ color: accent }}>
+        <Title order={6} style={{ color: accent }}>
           徐越的自测猫
         </Title>
         {monaco && (
           <Group spacing="xs">
             <Menu>
               <Menu.Target>
-                <Button variant="default">设置</Button>
+                <Button size="xs" variant="default">
+                  设置
+                </Button>
               </Menu.Target>
               <Menu.Dropdown>
                 <Group spacing="xs" align="start">
@@ -74,6 +76,7 @@ function Header() {
               </Menu.Dropdown>
             </Menu>
             <Button
+              size="xs"
               variant="gradient"
               gradient={{ from: "indigo", to: "cyan" }}
               onClick={run}
