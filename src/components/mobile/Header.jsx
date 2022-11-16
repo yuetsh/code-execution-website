@@ -30,10 +30,10 @@ function Header() {
       height={40}
       p="0 16px"
       withBorder={false}
-      style={{ backgroundColor: primary }}
+      sx={{ backgroundColor: primary }}
     >
-      <Group position="apart" style={{ height: "100%" }}>
-        <Title order={6} style={{ color: accent }}>
+      <Group position="apart" sx={{ height: "100%" }}>
+        <Title order={6} sx={{ color: accent }}>
           徐越的自测猫
         </Title>
         {monaco && (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useSnapshot } from "valtio"
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core"
-import { useViewportSize } from '@mantine/hooks'
+import { useViewportSize } from "@mantine/hooks"
 import { useMonaco } from "@monaco-editor/react"
 import Desktop from "./desktop"
 import Mobile from "./mobile"
@@ -14,7 +14,8 @@ function App() {
   const { width } = useViewportSize()
   const { primary, theme } = useSnapshot(state)
 
-  const defaultValue = width > BREAKPOINT ? localStorage.getItem("fontsize") || 24 : 16
+  const defaultValue =
+    width > BREAKPOINT ? localStorage.getItem("fontsize") || 24 : 16
   state.fontSize = parseInt(defaultValue, 10)
 
   const [colorScheme, setColorScheme] = useState(themeList[theme].type)

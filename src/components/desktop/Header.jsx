@@ -39,10 +39,10 @@ function Header() {
       height={60}
       p="0 16px"
       withBorder={false}
-      style={{ backgroundColor: primary }}
+      sx={{ backgroundColor: primary }}
     >
-      <Group position="apart" style={{ height: "100%" }}>
-        <Title order={3} style={{ color: accent }}>
+      <Group position="apart" sx={{ height: "100%" }}>
+        <Title order={3} sx={{ color: accent }}>
           徐越的自测猫
         </Title>
         {monaco && (
@@ -62,7 +62,7 @@ function Header() {
               value={fontSize}
               formatter={(num) => `字号：${num}px`}
               onChange={onFontSize}
-              style={{ width: 140 }}
+              sx={{ width: 140 }}
             />
             <Button variant="default" onClick={onLive2d}>
               看板娘
@@ -82,7 +82,7 @@ function Header() {
                 { value: "71", label: "语言：Python" },
                 { value: "62", label: "语言：Java" },
               ]}
-              style={{ width: 140 }}
+              sx={{ width: 140 }}
             />
             <Button
               variant="gradient"
