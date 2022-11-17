@@ -51,7 +51,9 @@ function Content() {
                   <Button variant="default" size="xs" onClick={onRestore}>
                     重置
                   </Button>
-                  <Button size="xs" onClick={copy}>复制</Button>
+                  <Button size="xs" onClick={copy}>
+                    复制
+                  </Button>
                 </Group>
               </Group>
               <Helper />
