@@ -52,21 +52,22 @@ function Header() {
               onChange={changeTheme}
               data={Object.keys(themeList).map((it) => ({
                 value: it,
-                label: `主题：${themeList[it].file}`,
+                label: `主题 ${themeList[it].file}`,
               }))}
+              sx={{ width: 190 }}
             />
             <NumberInput
               min={20}
               max={40}
               step={2}
               value={fontSize}
-              formatter={(num) => `字号：${num}px`}
+              formatter={(num) => `字号 ${num}px`}
               onChange={onFontSize}
-              sx={{ width: 140 }}
+              sx={{ width: 120 }}
             />
-            <Button variant="default" onClick={onLive2d}>
+            {/* <Button variant="default" onClick={onLive2d}>
               看板娘
-            </Button>
+            </Button> */}
             <Button variant="default" onClick={onRestore}>
               重置
             </Button>
@@ -77,12 +78,12 @@ function Header() {
               value={languageID}
               onChange={onLanguage}
               data={[
-                { value: "50", label: "语言：C" },
-                { value: "54", label: "语言：C++" },
-                { value: "71", label: "语言：Python" },
-                { value: "62", label: "语言：Java" },
+                { value: "50", label: "C" },
+                { value: "54", label: "C++" },
+                { value: "71", label: "Python" },
+                { value: "62", label: "Java" },
               ]}
-              sx={{ width: 140 }}
+              sx={{ width: 100 }}
             />
             <Button
               variant="gradient"

@@ -32,14 +32,14 @@ function Content() {
         options={{
           ...monacoConfig,
           fontSize,
-          lineNumbers: false,
+          lineNumbers: "on",
           scrollBeyondLastColumn: false,
         }}
       />
       <Tabs variant="outline" defaultValue="stdin">
         <Tabs.List>
           <Tabs.Tab value="stdin">输入信息</Tabs.Tab>
-          <Tabs.Tab value="stdout">输出信息</Tabs.Tab>
+          <Tabs.Tab value="stdout">运行结果</Tabs.Tab>
           <Menu position="top" closeOnClickOutside={false}>
             <Menu.Target>
               <Tabs.Tab value="helper">编程助手</Tabs.Tab>

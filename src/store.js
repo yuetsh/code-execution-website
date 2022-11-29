@@ -19,7 +19,7 @@ const defaultTheme = localStorage.getItem("theme") || "dracula"
 export const state = proxy({
   sourceValue: "",
   stdinValue: "输入信息",
-  stdoutValue: "输出信息",
+  stdoutValue: "运行结果",
   theme: defaultTheme,
   fontSize: 24,
   languageID: localStorage.getItem("language_id") || "50",
@@ -77,7 +77,7 @@ export async function onTheme(monaco, value) {
 export function onRestore() {
   state.sourceValue = sources[state.languageID]
   localStorage.removeItem("code_" + language[state.languageID])
-  state.stdoutValue = "输出信息"
+  state.stdoutValue = "运行结果"
 }
 
 export function onLanguage(value) {
@@ -86,7 +86,7 @@ export function onLanguage(value) {
   const record = localStorage.getItem("code_" + language[value])
   state.sourceValue = record || sources[value]
   localStorage.setItem("code_" + language[value], state.sourceValue)
-  state.stdoutValue = "输出信息"
+  state.stdoutValue = "运行结果"
 }
 
 export function onSource(value) {

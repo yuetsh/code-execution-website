@@ -9,7 +9,7 @@ import { state, onTheme } from "../store"
 import themeList from "../assets/themelist.json"
 
 function App() {
-  const BREAKPOINT = 1050
+  const BREAKPOINT = 900
   const monaco = useMonaco()
   const { width } = useViewportSize()
   const { primary, theme } = useSnapshot(state)
