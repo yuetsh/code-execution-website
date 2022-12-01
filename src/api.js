@@ -33,10 +33,9 @@ export async function createSubmission(code, stdin, id) {
       compiler_options: compilerOptions,
     }
     try {
-      const response = await http.post(
-        "/submissions?base64_encoded=true&wait=true",
-        payload
-      )
+      const response = await http.post("/submissions", payload, {
+        params: { base64_encoded: true, wait: true },
+      })
       const data = response.data
       return {
         output: [decode(data.compile_output), decode(data.stdout)]
