@@ -109,7 +109,8 @@ export async function run() {
     stdinValue,
     parseInt(state.languageID)
   )
-  state.stdoutValue = data.output
+  console.log(data, "data")
+  state.stdoutValue = data.output || ""
   state.runBtnLoading = false
 }
 

@@ -1,7 +1,8 @@
 import qs from "query-string"
+import axios from "axios"
 import { deadResults } from "./assets/templates"
 
-const BASE_URL = "https://judge0api.hyyz.izhai.net"
+const http = axios.create({ baseURL: "https://judge0api.hyyz.izhai.net" })
 
 function encode(str) {
   return btoa(unescape(encodeURIComponent(str || "")))
@@ -32,17 +33,11 @@ export async function createSubmission(code, stdin, id) {
       compiler_options: compilerOptions,
     }
     try {
-      const response = await fetch(
-        `${BASE_URL}/submissions?base64_encoded=true&wait=true`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
+      const response = await http.post(
+        "/submissions?base64_encoded=true&wait=true",
+        payload
       )
-      const data = await response.json()
+      const data = response.data
       return {
         output: [decode(data.compile_output), decode(data.stdout)]
           .join("\n")
