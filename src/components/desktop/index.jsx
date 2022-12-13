@@ -8,7 +8,7 @@ import { run } from "../../store"
 
 function Desktop() {
   useEffect(() => {
-    window.addEventListener("keydown", (e) => {
+    const preventBrowserShortcut = (e) => {
       if (e.ctrlKey || e.metaKey) {
         switch (e.key.toLowerCase()) {
           case "s":
@@ -25,7 +25,9 @@ function Desktop() {
         e.preventDefault()
         run()
       }
-    })
+    }
+    window.addEventListener("keydown", preventBrowserShortcut)
+    return () => window.removeEventListener("keydown", preventBrowserShortcut)
   }, [])
 
   return (
