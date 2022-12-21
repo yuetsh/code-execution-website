@@ -10,8 +10,14 @@ function PythonHelper() {
       <Button size="xs" variant="subtle" onClick={onHelper("\t")}>
         Tab
       </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(":")}>
+        {":"}
+      </Button>
       <Button size="xs" variant="subtle" onClick={onHelper("()")}>
         {"( )"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("[]")}>
+        {"[ ]"}
       </Button>
       <Button size="xs" variant="subtle" onClick={onHelper('""')}>
         {'" "'}
@@ -22,11 +28,50 @@ function PythonHelper() {
       <Button size="xs" variant="subtle" onClick={onHelper(" = ")}>
         {"="}
       </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(" > ")}>
+        {">"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(" >= ")}>
+        {">="}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(" < ")}>
+        {"<"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(" <= ")}>
+        {"<="}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("is")}>
+        is
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("not")}>
+        not
+      </Button>
       <Button size="xs" variant="subtle" onClick={onHelper("input()")}>
         输入
       </Button>
       <Button size="xs" variant="subtle" onClick={onHelper("print()")}>
         输出
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("if ")}>
+        if
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("else:")}>
+        else
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("for ")}>
+        for
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("in ")}>
+        in
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("True")}>
+        True
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("False")}>
+        False
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper("\n")}>
+        换行
       </Button>
     </>
   )
@@ -46,6 +91,18 @@ function CHelper() {
       </Button>
       <Button size="xs" variant="subtle" onClick={onHelper("\\n")}>
         {"\\n"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(" > ")}>
+        {">"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(" >= ")}>
+        {">="}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(" < ")}>
+        {"<"}
+      </Button>
+      <Button size="xs" variant="subtle" onClick={onHelper(" <= ")}>
+        {"<="}
       </Button>
       <Button size="xs" variant="subtle" onClick={onHelper("<>")}>
         {"< >"}

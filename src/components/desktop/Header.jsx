@@ -65,9 +65,9 @@ function Header() {
               onChange={onFontSize}
               sx={{ width: 120 }}
             />
-            {/* <Button variant="default" onClick={onLive2d}>
+            <Button variant="default" onClick={onLive2d}>
               看板娘
-            </Button> */}
+            </Button>
             <Button variant="default" onClick={onRestore}>
               重置
             </Button>
