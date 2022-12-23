@@ -38,6 +38,7 @@ export async function createSubmission(code, stdin, id) {
       })
       const data = response.data
       return {
+        status: data.status && data.status.id,
         output: [decode(data.compile_output), decode(data.stdout)]
           .join("\n")
           .trim(),

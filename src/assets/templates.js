@@ -25,6 +25,7 @@ export const deadResults = {
     encoded:
       "I2luY2x1ZGU8c3RkaW8uaD4NCg0KaW50IG1haW4oKQ0Kew0KICAgIHByaW50Zigi6buE5bKp5LiA6IGMIik7DQogICAgcmV0dXJuIDA7DQp9",
     result: {
+      status: 3,
       output: "黄岩一职",
     },
   },
@@ -32,12 +33,14 @@ export const deadResults = {
     encoded:
       "I2luY2x1ZGU8aW9zdHJlYW0+DQoNCnVzaW5nIG5hbWVzcGFjZSBzdGQ7DQoNCmludCBtYWluKCkNCnsNCiAgICBjb3V0PDwi6buE5bKp5LiA6IGMIjw8ZW5kbDsNCiAgICByZXR1cm4gMDsNCn0=",
     result: {
+      status: 3,
       output: "黄岩一职",
     },
   },
   71: {
     encoded: "cHJpbnQoIum7hOWyqeS4gOiBjCIp",
     result: {
+      status: 3,
       output: "黄岩一职",
     },
   },
@@ -45,6 +48,7 @@ export const deadResults = {
     encoded:
       "cHVibGljIGNsYXNzIE1haW4gew0KICAgIHB1YmxpYyBzdGF0aWMgdm9pZCBtYWluKFN0cmluZ1tdIGFyZ3MpIHsNCiAgICAgICAgU3lzdGVtLm91dC5wcmludGxuKCLpu4TlsqnkuIDogYwiKTsNCiAgICB9DQp9",
     result: {
+      status: 3,
       output: "黄岩一职",
     },
   },
