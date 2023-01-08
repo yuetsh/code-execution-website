@@ -32,7 +32,6 @@ function Content() {
             options={{
               ...monacoConfig,
               fontSize,
-              lineNumbers: true,
               scrollBeyondLastLine: true,
             }}
           />

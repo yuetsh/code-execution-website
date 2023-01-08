@@ -2,9 +2,8 @@ export const monacoConfig = {
   minimap: { enabled: false },
   automaticLayout: true,
   scrollBeyondLastLine: false,
-  lineNumbers: "off",
-  autoIndent: true,
   tabSize: 4,
+  lineNumbersMinChars: 3,
 }
 
 export function unique(arr, key){
