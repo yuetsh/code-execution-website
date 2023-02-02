@@ -5,7 +5,9 @@ import { deadResults } from "./assets/templates"
 const http = axios.create({ baseURL: "https://judge0api.hyyz.izhai.net" })
 
 function encode(string) {
-  return window.btoa(String.fromCharCode(...new TextEncoder().encode(string ?? "")))
+  return window.btoa(
+    String.fromCharCode(...new TextEncoder().encode(string ?? ""))
+  )
 }
 
 function decode(bytes) {
