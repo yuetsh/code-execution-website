@@ -5,16 +5,18 @@
 }
 
 .image0 {
-  right: 14px;
+  right: 0px;
   bottom: -6px;
 }
 
 .image1 {
-  right: 3px;
+  right: -10px;
+  bottom: 0px;
 }
 
 .image2 {
-  right: 6px;
+  right: -5px;
+  bottom: 0px;
 }
 
 .live2dCanvasContainer {
