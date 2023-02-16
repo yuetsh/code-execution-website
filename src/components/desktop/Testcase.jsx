@@ -8,7 +8,7 @@ import {
   LoadingOverlay,
 } from "@mantine/core"
 import { useSnapshot } from "valtio"
-import { downloadZip } from "client-zip"
+import JSZip from "jszip"
 import { saveAs } from "file-saver"
 import { createSubmission } from "../../api"
 import { state } from "../../store"
@@ -26,17 +26,17 @@ function Testcase({ files, setFiles, clear }) {
         data.push({
           name: `${i + 1}.in`,
           input: files[i].in,
-          lastModified: new Date(),
         })
         data.push({
           name: `${i + 1}.out`,
           input: files[i].out,
-          lastModified: new Date(),
         })
       }
     }
     if (!data.length) return
-    const blob = await downloadZip(data).blob()
+    const zip = new JSZip()
+    data.forEach((file) => zip.file(file.name, file.input))
+    const blob = await zip.generateAsync({ type: "blob" })
     saveAs(blob, "testcase.zip")
   }
 

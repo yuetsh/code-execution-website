@@ -11,6 +11,7 @@ export default defineConfig({
         manualChunks: {
           react: ["react", "react-dom"],
           ui: ["@mantine/core", "@mantine/hooks", "@emotion/react"],
+          file: ["file-saver", "jszip"],
         },
       },
     },
