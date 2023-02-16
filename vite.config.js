@@ -5,7 +5,6 @@ import legacy from "@vitejs/plugin-legacy"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  esbuild: { target: "es2015" },
   build: {
     rollupOptions: {
       output: {
@@ -19,7 +18,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    legacy({ targets: ["defaults", "not IE 11"] }),
+    legacy({ targets: ["chrome > 63", "not IE 11"] }),
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
