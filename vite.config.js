@@ -5,6 +5,7 @@ import legacy from "@vitejs/plugin-legacy"
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  esbuild: { target: "es2015" },
   build: {
     rollupOptions: {
       output: {
