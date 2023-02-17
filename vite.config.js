@@ -6,6 +6,7 @@ import legacy from "@vitejs/plugin-legacy"
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
+    targets: ["chrome > 63", "not IE 11"],
     rollupOptions: {
       output: {
         manualChunks: {
