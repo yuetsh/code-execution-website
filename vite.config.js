@@ -15,5 +15,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react(), legacy({ targets: ["defaults", "not IE 11"] })],
+  plugins: [react(), legacy({ targets: ["chrome 66", "not IE 11"] })],
 })
