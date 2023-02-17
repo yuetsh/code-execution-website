@@ -5,7 +5,7 @@ import { loader } from "@monaco-editor/react"
 import App from "./components/App"
 import { getChromeVersion } from "./utils"
 
-const isLowVersion = getChromeVersion() > 70
+const isLowVersion = getChromeVersion() < 70
 
 if (isLowVersion) {
   loader.config({ monaco })
