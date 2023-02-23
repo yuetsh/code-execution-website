@@ -3,9 +3,7 @@ import ReactDOM from "react-dom/client"
 import * as monaco from "monaco-editor"
 import { loader } from "@monaco-editor/react"
 import App from "./components/App"
-import { getChromeVersion } from "./utils"
-
-const isLowVersion = getChromeVersion() < 70
+import { isLowVersion } from "./utils"
 
 if (isLowVersion) {
   loader.config({ monaco })

@@ -1,8 +1,11 @@
 import qs from "query-string"
 import axios from "axios"
 import { deadResults } from "./assets/templates"
+import { isLowVersion } from "./utils"
 
-const http = axios.create({ baseURL: "https://judge0api.hyyz.izhai.net" })
+const prefix = isLowVersion ? "http" : "https"
+
+const http = axios.create({ baseURL: prefix + "://judge0api.hyyz.izhai.net" })
 
 function encode(string) {
   return window.btoa(

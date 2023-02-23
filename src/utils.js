@@ -20,7 +20,9 @@ export function unique(arr, key) {
   return arr.filter((item) => !res.has(item[key]) && res.set(item[key], 1))
 }
 
-export function getChromeVersion() {
+function getChromeVersion() {
   var raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./)
   return raw ? parseInt(raw[2], 10) : 0
 }
+
+export const isLowVersion = getChromeVersion() < 70
