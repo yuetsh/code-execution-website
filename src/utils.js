@@ -25,4 +25,4 @@ function getChromeVersion() {
   return raw ? parseInt(raw[2], 10) : 0
 }
 
-export const isLowVersion = getChromeVersion() < 70
+export const isLowVersion = getChromeVersion() < 80
