@@ -9,7 +9,7 @@ if (isLowVersion) {
   loader.config({ monaco })
 } else {
   loader.config({
-    paths: { vs: "https://cdn.staticfile.org/monaco-editor/0.36.1/min/vs" },
+    paths: { vs: "https://cdn.staticfile.org/monaco-editor/0.34.1/min/vs" },
     "vs/nls": { availableLanguages: { "*": "zh-cn" } },
   })
 }
