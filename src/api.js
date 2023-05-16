@@ -1,6 +1,6 @@
 import qs from "query-string"
 import axios from "axios"
-import { deadResults } from "./assets/templates"
+import { deadResults, CJN } from "./assets/templates"
 import { isLowVersion } from "./utils"
 
 const prefix = isLowVersion ? "http" : "https"
@@ -55,11 +55,19 @@ export async function createSubmission(code, stdin, id) {
 }
 
 export function getOJProblem() {
-  const parsed = qs.parse(window.location.search)
-  if (!parsed.stdin) return ""
+  const query = qs.parse(window.location.search)
+  if (!query.stdin) return ""
   try {
-    return JSON.parse(decodeURIComponent(window.atob(parsed.stdin)))
+    return JSON.parse(decodeURIComponent(window.atob(query.stdin)))
   } catch (e) {
     return ""
   }
+}
+
+export function getSourceCode() {
+  const query = qs.parse(window.location.search)
+  if (!query.cjn) return ""
+  const code = parseInt(query.cjn, 10)
+  // 只有 python
+  return { source: CJN[code], id: "71" }
 }

@@ -43,7 +43,7 @@ function Header() {
     >
       <Group position="apart" sx={{ height: "100%" }}>
         <Title order={3} sx={{ color: accent }}>
-          徐越的自测猫
+          自测猫
         </Title>
         {monaco && (
           <Group spacing="xs">
@@ -65,9 +65,9 @@ function Header() {
               onChange={onFontSize}
               sx={{ width: 120 }}
             />
-            <Button variant="default" onClick={onLive2d}>
+            {/* <Button variant="default" onClick={onLive2d}>
               看板娘
-            </Button>
+            </Button> */}
             <Button variant="default" onClick={onRestore}>
               重置
             </Button>

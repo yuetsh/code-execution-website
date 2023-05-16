@@ -34,7 +34,7 @@ function Header() {
     >
       <Group position="apart" sx={{ height: "100%" }}>
         <Title order={6} sx={{ color: accent }}>
-          徐越的自测猫
+          自测猫
         </Title>
         {monaco && (
           <Group spacing="xs">

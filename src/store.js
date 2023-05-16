@@ -1,6 +1,6 @@
 import { proxy } from "valtio"
 import copyText from "copy-text-to-clipboard"
-import { createSubmission, getOJProblem } from "./api"
+import { createSubmission, getOJProblem, getSourceCode } from "./api"
 import { language, sources } from "./assets/templates"
 import themeList from "./assets/themelist.json"
 
@@ -33,7 +33,8 @@ export function sourceEditorDidMount(editor) {
   sourceEditorRef = editor
   editor.focus()
   const record = localStorage.getItem("code_" + language[state.languageID])
-  state.sourceValue = record || sources[state.languageID]
+  const code = getSourceCode()
+  state.sourceValue = code.source || record || sources[state.languageID]
   localStorage.setItem("code_" + language[state.languageID], state.sourceValue)
   localStorage.setItem("language_id", state.languageID)
 }

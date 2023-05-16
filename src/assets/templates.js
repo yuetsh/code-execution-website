@@ -53,3 +53,9 @@ export const deadResults = {
     },
   },
 }
+
+export const CJN = {
+  1: `#入园检测\na=input()\n#请大家将以下代码用if结构组合在一起。\n\n a=='有票'                      #如果有票\n\tprint("可以入园")`,
+  2: `#变量a为年龄\nnianling=int(input())\n#请大家将以下代码用if结构组合在一起。\n nianling>=60\t#如果年龄大于等于60\n\tprint('敬老票')\n\t\t\t\t#否则\n\tprint('成人票')`,
+  3: `#变量a为年龄\nnianling=int(input())\n#请大家将以下代码用if结构组合在一起。\n nianling<12\t\t#如果年龄小于12\n\tprint('温馨之旅')\n\t\t\t\t\t#否则\n\tprint('惊险之旅')`,
+}
