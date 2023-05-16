@@ -14,7 +14,7 @@ if (localStorage.getItem("themes")) {
   cachedThemes = JSON.parse(localStorage.getItem("themes"))
 }
 
-const defaultTheme = localStorage.getItem("theme") || "dracula"
+const defaultTheme = localStorage.getItem("theme") || "vs-light"
 
 export const state = proxy({
   sourceValue: "",
