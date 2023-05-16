@@ -22,7 +22,7 @@ export const state = proxy({
   stdoutValue: "运行结果",
   theme: defaultTheme,
   fontSize: 24,
-  languageID: localStorage.getItem("language_id") || "50",
+  languageID: getSourceCode().id || localStorage.getItem("language_id") || "50",
   runBtnLoading: false,
   primary: themeList[defaultTheme].primary,
   accent: themeList[defaultTheme].accent,
