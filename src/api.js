@@ -1,6 +1,6 @@
 import qs from "query-string"
 import axios from "axios"
-import { deadResults, CJN } from "./assets/templates"
+import { deadResults } from "./assets/templates"
 import { isLowVersion } from "./utils"
 
 const prefix = isLowVersion ? "http" : "https"
@@ -62,12 +62,4 @@ export function getOJProblem() {
   } catch (e) {
     return ""
   }
-}
-
-export function getSourceCode() {
-  const query = qs.parse(window.location.search)
-  if (!query.cjn) return ""
-  const code = parseInt(query.cjn, 10)
-  // 只有 python
-  return { source: CJN[code], id: "71" }
 }

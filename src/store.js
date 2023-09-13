@@ -1,6 +1,6 @@
 import { proxy } from "valtio"
 import copyText from "copy-text-to-clipboard"
-import { createSubmission, getOJProblem, getSourceCode } from "./api"
+import { createSubmission, getOJProblem } from "./api"
 import { language, sources } from "./assets/templates"
 import themeList from "./assets/themelist.json"
 
@@ -22,7 +22,7 @@ export const state = proxy({
   stdoutValue: "运行结果",
   theme: defaultTheme,
   fontSize: 24,
-  languageID: getSourceCode().id || localStorage.getItem("language_id") || "50",
+  languageID: localStorage.getItem("language_id") || "71",
   runBtnLoading: false,
   primary: themeList[defaultTheme].primary,
   accent: themeList[defaultTheme].accent,
@@ -33,17 +33,18 @@ export function sourceEditorDidMount(editor) {
   sourceEditorRef = editor
   editor.focus()
   const record = localStorage.getItem("code_" + language[state.languageID])
-  const code = getSourceCode()
-  state.sourceValue = code.source || record || sources[state.languageID]
+  state.sourceValue = record || sources[state.languageID]
   localStorage.setItem("code_" + language[state.languageID], state.sourceValue)
   localStorage.setItem("language_id", state.languageID)
 }
 
 export function stdinEditorDidMount() {
   const { input, id } = getOJProblem()
+  console.log(id)
   if (input && id) {
     state.stdinValue = input
     state.languageID = String(id)
+    console.log(state.languageID, "state.languageID")
     localStorage.setItem("language_id", String(id))
   }
 }
