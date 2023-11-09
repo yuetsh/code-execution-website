@@ -9,17 +9,17 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v3
         with:
-          node-version: "current"
+          node-version: 20
           cache: "npm"
       - run: npm install
       - run: CI=false npm run build
 
-      - uses: easingthemes/ssh-deploy@v2.2.11
-        env:
+      - uses: easingthemes/ssh-deploy@main
+        with:
           SSH_PRIVATE_KEY: ${{ secrets.KEY }}
           REMOTE_HOST: ${{ secrets.HOST }}
           ARGS: "-avzr --delete"
