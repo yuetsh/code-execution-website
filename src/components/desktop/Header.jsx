@@ -52,9 +52,9 @@ function Header() {
               onChange={changeTheme}
               data={Object.keys(themeList).map((it) => ({
                 value: it,
-                label: `主题 ${themeList[it].file}`,
+                label: `${themeList[it].file}`,
               }))}
-              sx={{ width: 190 }}
+              sx={{ width: 155 }}
             />
             <NumberInput
               min={20}
@@ -72,7 +72,7 @@ function Header() {
               重置
             </Button>
             <Button variant="default" onClick={copy}>
-              复制
+              复制代码
             </Button>
             <Select
               value={languageID}
