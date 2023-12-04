@@ -85,6 +85,13 @@ function Content() {
           <div className={styles.box} />
         </Tabs.Panel>
       </Tabs>
+      <a
+        className={styles.beian}
+        href="https://beian.miit.gov.cn"
+        target="_blank"
+      >
+        浙ICP备2023044109号
+      </a>
     </Stack>
   )
 }
