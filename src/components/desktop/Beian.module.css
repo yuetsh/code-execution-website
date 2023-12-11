@@ -1,0 +1,19 @@
+.beian {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+
+.beianLink {
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.beianImg {
+  width: 14px;
+  height: 14px;
+  transform: translateY(-2px);
+  margin: 0 4px;
+}

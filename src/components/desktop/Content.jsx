@@ -13,6 +13,7 @@ import {
   onStdin,
 } from "../../store"
 import { monacoConfig } from "../../utils"
+import Beian from "./Beian"
 
 function Content() {
   const { languageID, theme, fontSize, sourceValue, stdinValue, stdoutValue } =
@@ -61,13 +62,7 @@ function Content() {
           </Allotment>
         </Allotment.Pane>
       </Allotment>
-      <a
-        className={styles.beian}
-        href="https://beian.miit.gov.cn"
-        target="_blank"
-      >
-        浙ICP备2023044109号
-      </a>
+      <Beian />
     </div>
   )
 }
