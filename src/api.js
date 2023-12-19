@@ -5,7 +5,7 @@ import { isLowVersion } from "./utils"
 
 const prefix = isLowVersion ? "http" : "https"
 
-const http = axios.create({ baseURL: prefix + "://judge0api.hyyz.izhai.net" })
+const http = axios.create({ baseURL: prefix + "://judge0api.xuyue.cc" })
 
 function encode(string) {
   return window.btoa(
